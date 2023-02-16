@@ -1,0 +1,142 @@
+:root {
+    --main-color: #0070BB;
+    --active-color: rgb(0, 142, 135);
+    --font-color: #313131;
+    --width-sidebar: 300px;
+}
+.none{display: none!important;}
+#app, body, html {
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 12px;
+    color: var(--font-color);
+}
+a{text-decoration: none}
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    margin: 20px 0;
+    width: 180px;
+    text-align: center;
+}
+
+.logo span {
+    font-size: 30px;
+    color: rgb(0, 142, 135);
+}
+
+.mb-10{margin-bottom: 10px}
+.mb-15{margin-bottom: 15px}
+.mb-20{margin-bottom: 20px}
+.mr-15{margin-right: 15px}
+
+.w-side,.p-side{
+    margin-left: var(--width-sidebar);
+}
+.body-content{
+    background: #fff;
+    border-radius: 5px;
+    padding: 30px 20px;
+}
+h1.title-page {
+    margin: 0 0 20px 0;
+    font-weight: 400;
+}
+h1.title-page i{
+    color: var(--active-color);
+}
+.services{
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+}
+.box-service{
+    background-position: bottom 15px left 15px;
+    background-repeat: no-repeat;
+    background-size: 60px;
+}
+
+.services>.box-service{
+    width: 100%;
+    max-width: 500px;
+    animation: wave 30s infinite linear;
+    font-size: 1.3rem;
+}
+.services-three{
+    width: 100%;
+    max-width: 1350px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+.services-three>.box-service{
+    width: 100%;
+    max-width: 330px;
+    animation: wave 30s infinite linear;
+    font-size: 1.3rem;
+}
+.pointer{cursor: pointer}
+@-webkit-keyframes waweAn {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes waweAn {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes waweAn {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes waweAn {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+.b-white{
+    background: #fff;
+    color: #313131;
+}
+.b-white a{color: #313131;}
+.b-white i{color: var(--active-color);}
+.b-white>.item-menu:hover, .b-white>.item-menu-has-children:hover,.b-white>.sub-item-menu>.item-menu:hover{
+    background: rgba(144, 223, 255, 0.4);
+}
+.user-avatar{width: 40px; margin-right: 15px; cursor: pointer}
+.head-info i{
+    cursor: pointer
+}
+.head-info{
+    display: flex;
+    align-items: center;
+}
+.head-info .auth-name{
+    margin-right: 10px;
+}
+.head-info .auth-name>span{
+    color: var(--active-color);
+}
+.line100 {
+    background: rgba(0, 0, 0, 0.1);
+    height: 2px;
+    width: 100%;
+    margin: 30px auto;
+}
+
