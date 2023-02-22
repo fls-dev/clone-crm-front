@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Login from "@/views/Login.vue";
 import LayoutAdmin from "@/views/UserLayout.vue";
+import i18n from "@/locales/i18n";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,11 +10,6 @@ const router = createRouter({
             path: '/',
             name: 'Login',
             component: Login
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: () => import('../views/UserLayout.vue')
         },
         {
             path: '/user',
@@ -25,18 +21,25 @@ const router = createRouter({
                     name: 'dashboard',
                     component: () => import('@/components/user/pages/Manager.vue'),
                     meta: {
-                        titlePage:"Manager usług",
                         iconPage:"fa-puzzle-piece",
                         requiresAuth: true
                     },
                 },
                 {
-                    path: 'consult',
-                    name: 'consult',
-                    component: () => import('@/components/user/pages/Consultations.vue'),
+                    path: 'consultation',
+                    name: 'consultation',
+                    component: () => import('@/components/user/pages/Consultation.vue'),
                     meta: {
-                        titlePage:"KONSULTACJE",
                         iconPage:"fa-comments-question-check",
+                        requiresAuth: true
+                    },
+                },
+                {
+                    path: 'company-no-client',
+                    name: 'company-no-client',
+                    component: () => import('@/components/user/pages/MyCompanyNoClient.vue'),
+                    meta: {
+                        iconPage:"fa-address-card",
                         requiresAuth: true
                     },
                 },
@@ -45,7 +48,6 @@ const router = createRouter({
                     name: 'invoices',
                     component: () => import('@/components/user/pages/Invoices.vue'),
                     meta: {
-                        titlePage:"Fakturowanie online",
                         iconPage:"fa-file-invoice",
                         requiresAuth: true
                     },
@@ -54,5 +56,11 @@ const router = createRouter({
         }
     ]
 })
-
+// router.beforeEach((to) => {
+//     // ✅ This will work make sure the correct store is used for the
+//     // current running app
+//     const main = useMainStore(pinia)
+//
+//     if (to.meta.requiresAuth && !main.isLoggedIn) return '/login'
+// })
 export default router

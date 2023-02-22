@@ -1,91 +1,134 @@
 <template>
-  <div class="user-menu b-white">
+  <div class="user-menu" :class="color">
+<!--  <div class="user-menu b-white">-->
     <router-link class="item-menu" :to="{ name: 'dashboard'}">
       <i class="fa-light fa-puzzle-piece"></i>
-      <span>Manager usług</span>
+      <span>{{ $t("menuUser.manager") }}</span>
     </router-link>
     <div @click="showSubMenu" data-parent="company" class="item-menu-has-children">
       <div>
         <i class="fa-light fa-address-card"></i>
-        <span>Moja firma</span>
+        <span>{{ $t("menuUser.company") }}</span>
       </div>
       <i class="fa-light fa-chevron-down"></i>
     </div>
     <div data-menu="company" class="sub-item-menu none">
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
         <i class="fa-light fa-address-card"></i>
-        <span>Moja firma</span>
+        <span>{{ $t("menuUser.company") }}</span>
       </router-link>
       <router-link class="item-menu" to="">
         <i class="fa-light fa-users"></i>
-        <span>Pracownicy firmy</span>
+        <span>{{ $t("menuUser.employees") }}</span>
       </router-link>
       <router-link class="item-menu" to="">
         <i class="fa-light fa-crate-empty"></i>
-        <span>Moje podatki</span>
+        <span>{{ $t("menuUser.tax") }}</span>
       </router-link>
     </div>
 
     <router-link class="item-menu" to="">
       <i class="fa-light fa-cloud"></i>
-      <span>MOJA CHMURA</span>
+      <span>{{ $t("menuUser.tax") }}</span>
     </router-link>
 
     <!--   sub   -->
     <div @click="showSubMenu" data-parent="webinars" class="item-menu-has-children">
       <div>
         <i class="fa-light fa-calendar-days"></i>
-        <span>Webinary</span>
+        <span>{{ $t("menuUser.webinar") }}</span>
       </div>
       <i class="fa-light fa-chevron-down"></i>
     </div>
     <div data-menu="webinars" class="sub-item-menu none">
       <router-link class="item-menu" to="">
         <i class="fa-light fa-calendar-days"></i>
-        <span>Przyszłe</span>
+        <span>{{ $t("menuUser.future") }}</span>
       </router-link>
       <router-link class="item-menu" to="">
         <i class="fa-light fa-clapperboard-play"></i>
-        <span>Nagrania</span>
+        <span>{{ $t("menuUser.recordings") }}</span>
       </router-link>
     </div>
 
-    <router-link class="item-menu" to="">
+    <router-link class="item-menu" :to="{ name: 'consultation'}">
       <i class="fa-light fa-comments-question-check"></i>
-      Konsultacje
+      <span>{{ $t("menuUser.consult") }}</span>
     </router-link>
 
-    <router-link class="item-menu" to="">
-      <i class="fa-light fa-file-invoice"></i>
-      <span>Faktury</span>
-    </router-link>
 
-    <router-link class="item-menu" to="">
-      <i class="fa-light fa-print"></i>
-      E-Dokumenty
-    </router-link>
+    <!--   sub invoice  -->
+    <div @click="showSubMenu" data-parent="invoice" class="item-menu-has-children">
+      <div>
+        <i class="fa-light fa-file-invoice"></i>
+        <span>{{ $t("menuUser.invoice") }}</span>
+      </div>
+      <i class="fa-light fa-chevron-down"></i>
+    </div>
+    <div data-menu="invoice" class="sub-item-menu none">
+      <router-link class="item-menu" to="">
+        <i class="fa-light fa-file-invoice"></i>
+        <span>{{ $t("menuUser.invoice") }}</span>
+      </router-link>
+      <router-link class="item-menu" to="">
+        <i class="fa-light fa-list-ul"></i>
+        <span>{{ $t("menuUser.list-service") }}</span>
+      </router-link>
+      <router-link class="item-menu" to="">
+        <i class="fa-light fa-user-tie-hair"></i>
+        <span>{{ $t("menuUser.contractors") }}</span>
+      </router-link>
+    </div>
+
+
+    <!--   sub invoice  -->
+    <div @click="showSubMenu" data-parent="e-doc" class="item-menu-has-children">
+      <div>
+        <i class="fa-light fa-print"></i>
+        <span>{{ $t("menuUser.e-doc") }}</span>
+      </div>
+      <i class="fa-light fa-chevron-down"></i>
+    </div>
+    <div data-menu="e-doc" class="sub-item-menu none">
+      <router-link class="item-menu" to="">
+        <i class="fa-light fa-print"></i>
+        <span>{{ $t("menuUser.e-doc") }}</span>
+      </router-link>
+    </div>
+
 
     <router-link class="item-menu" to="">
       <i class="fa-light fa-folders"></i>
-     <span> Usługi dodatkowe</span>
+      <span>{{ $t("menuUser.additional") }}</span>
     </router-link>
 
     <router-link class="item-menu" to="">
       <i class="fa-light fa-gamepad-modern"></i>
-      Zrób sobie przerwę
+      <span>{{ $t("menuUser.take-a-break") }}</span>
+    </router-link>
+    <router-link class="item-menu" to="">
+      <i class="fa-light fa-phone-plus"></i>
+      <span>{{ $t("menuUser.support") }}</span>
     </router-link>
 
     <router-link class="item-menu" to="">
       <i class="fa-light fa-rocket-launch"></i>
-      MIA START
+      <span>{{ $t("menuUser.mia-start") }}</span>
     </router-link>
   </div>
 </template>
 
 <script>
 
+import {useInfoStore} from "@/stores/info.store";
+
 export default {
   name: "UserMenu",
+  computed: {
+    color () {
+      return useInfoStore().getActiveColor
+    }
+  },
   methods: {
     showSubMenu: (event) => {
       const target = event.target;
@@ -108,16 +151,16 @@ export default {
 </script>
 
 <style scoped>
+.user-menu {
+  overflow: auto;
+}
+
 .user-menu a {
   padding: 10px 20px;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   font-weight: 300;
   display: flex;
   align-items: center;
-}
-
-.w-100 {
-  width: 100%;
 }
 
 .item-menu {
@@ -137,8 +180,8 @@ export default {
 }
 
 .item-menu-has-children {
-  padding: 5px 20px;
-  font-size: 1.6rem;
+  padding: 10px 20px;
+  font-size: 1.1rem;
   font-weight: 400;
   display: flex;
   justify-content: space-between;

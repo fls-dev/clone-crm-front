@@ -3,20 +3,22 @@
     <HeaderUser />
   <div class="header-menu-h"></div>
   <div class="main-layout">
-    <div class="sidebar b-white">
-      <LogoBox />
+    <div class="sidebar" :class="color">
+<!--    <div class="sidebar b-white">-->
       <UserMenu />
     </div>
-    <div class="content w-side">
-      <div class="page-head">
-        <h1 class="title-page"><i class="fa-light" :class=this.$route.meta.iconPage></i> {{this.$route.meta.titlePage}}</h1>
+    <div class="content">
+     <div class="area">
+       <router-view />
+     </div>
+      <div class="footer">
+        2022 © MIA CONSULT GROUP Sp. z o.o. | v3.2 | NIP: 1133018235 |Oferta |Regulamin |Cookies | Support: support@mcgroup.pl
       </div>
-      <router-view />
     </div>
   </div>
-    <div class="footer p-side">
-      2022 © MIA CONSULT GROUP Sp. z o.o. | v3.2 | NIP: 1133018235 |Oferta |Regulamin |Cookies | Support: support@mcgroup.pl
-    </div>
+<!--    <div class="footer">-->
+<!--      2022 © MIA CONSULT GROUP Sp. z o.o. | v3.2 | NIP: 1133018235 |Oferta |Regulamin |Cookies | Support: support@mcgroup.pl-->
+<!--    </div>-->
   </div>
 
 </template>
@@ -25,20 +27,31 @@
 
 
 import Manager from "@/components/user/pages/Manager.vue";
-import Consultations from "@/components/user/pages/Consultations.vue";
+import Consultations from "@/components/user/pages/Consultation.vue";
 import UserMenu from "@/components/user/UserMenu.vue";
 import HeaderUser from "@/components/user/HeaderUser.vue";
 import LogoBox from "@/components/static/LogoBox.vue";
+import {useUsersStore} from "@/stores";
+import {useInfoStore} from "@/stores/info.store";
 
 export default {
   name: "LayoutAdmin",
   components: {LogoBox, HeaderUser, UserMenu, Manager,Consultations},
+  data() {
+    return {
 
+    }
+  },
+  computed: {
+    color () {
+      return useInfoStore().getActiveColor
+    }
+  },
   methods:{
 
   },
   mounted() {
-    console.log(this.$route)
+    // console.log(this.$route)
   }
 }
 </script>
@@ -50,36 +63,36 @@ export default {
   display: flex;
 }
 .sidebar {
+  height: 100%;
+  padding: 20px 0;
   width: 300px;
-  height: 100vh;
-  position: fixed;
-  top: 0; bottom: 0;
+  overflow: auto;
 }
+
 .content{
   background: #f2f2f2;
-  padding: 20px 20px 160px 20px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: auto;
-  min-height: 80vh;
+}
+.area{
+  padding: 20px;
 }
 .footer{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   color: white;
   background: #313131;
-  width: calc(100% - var(--width-sidebar));
+  width: 100%;
   padding: 15px;
   text-align: center;
 }
 .h-100{
   height: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
   width: 100%;
 }
 .header-menu-h{height: 65px;width: 100%}
-.footer-h{height: 30px;width: 100%}
 
 @media screen and (max-width: 1020px){
   .sidebar{display: none}

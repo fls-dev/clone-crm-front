@@ -1,9 +1,10 @@
 <template>
+ <LanguageSwitch />
   <div class="background-login">
     <div class="box-shadow">
       <div class="logo"><span>C</span>LONE<span>CRM</span></div>
       <div v-if="isLogin">
-        <p class="title">Logowanie</p>
+        <p class="title">{{ $t("main.login") }}</p>
         <form class="login-form">
           <label>Login</label>
           <input type="email" :value="login" class="login">
@@ -58,8 +59,12 @@
 </template>
 
 <script>
+import {useInfoStore} from "@/stores/info.store";
+import LanguageSwitch from "@/components/static/LanguageSwitch.vue";
+
 export default {
   name: "Login",
+  components: {LanguageSwitch},
   data() {
     return {
       login: null,
@@ -97,12 +102,24 @@ export default {
       this.isForgot = true
       this.isRegisterBtn = true
     }
-
   }
 };
 </script>
 
 <style scoped>
+.logo {
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  margin: 20px auto;
+  width: 180px;
+  text-align: center;
+}
+
+.logo span {
+  font-size: 30px;
+  color: rgb(0, 142, 135);
+}
 .background-login {
   width: 100%;
   height: 100vh;
@@ -160,7 +177,6 @@ export default {
 }
 
 .login-form input:focus, .register-form input:focus, .forgot-form input:focus{
-  border: none;
   outline: none;
   border-bottom: 1px solid var(--active-color);
 }
@@ -183,7 +199,7 @@ export default {
 }
 .background-login .title {
   color: var(--main-color);
-  font-size: 1.6rem;
+  font-size: 1.3rem;
 }
 
 .link-forgot {
@@ -219,25 +235,25 @@ export default {
   border: 1px solid lightgrey;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .title-marg {
   color: var(--main-color);
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   margin-bottom: 5px;
 }
 
 .sub-title {
   color: var(--main-color);
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-top: 5px;
   margin-bottom: 15px;
 }
 
 .little-text {
   max-width: 300px;
-  font-size: .7rem;
+  font-size: .5rem;
 }
 .logo {margin: 20px auto;}
 

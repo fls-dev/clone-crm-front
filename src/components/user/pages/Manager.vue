@@ -1,98 +1,100 @@
 <template>
+  <div class="page-head">
+    <h1 class="title-page"><i class="fa-light" :class=this.$route.meta.iconPage></i> {{$t("menuUser.manager")}}</h1>
+  </div>
   <div class="body-content">
-
     <div class="services">
       <div class="box-service back-mia">
        <div class="serv-head green-head">
-         <p>NIKT NIE PROWADZI KSIĘGOWOŚĆ?</p>
+         <p>{{ $t('manager.box_1_title') }}</p>
        </div>
         <div class="serv-body green">
           <p class="desc">
-            <span>Zapraszamy do współpracy.</span>
-            <span class="b-span">Biuro Rachunkowe MCGroup.</span>
-            <span>Oferta dla użytkowników crm.mcgroup.pl</span>
+            <span>{{ $t('manager.box_1_str_1') }}</span>
+            <span class="b-span">{{ $t('manager.box_1_str_2') }}</span>
+            <span>{{ $t('manager.box_1_str_3') }}</span>
           </p>
-          <router-link class="btn-serv green-btn" :to="{ name: 'consult'}">Dowiedz się więcej</router-link>
+          <router-link class="btn-serv green-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_1')}}</router-link>
         </div>
       </div>
     </div>
     <div class="line100"></div>
-    <div class="services-three">
+    <div class="services-three line-1">
       <div class="box-service back-fak">
         <div class="serv-head orange-head">
-          <p>FAKTURY</p>
+          <p>{{ $t('manager.box_2_title') }}</p>
         </div>
         <div class="serv-body orange">
           <p class="desc">
-            <span>Fakturowanie online.</span>
-            <span>Twórz faktury w szybki i wygodny sposób! </span>
+            <span>{{ $t('manager.box_2_str_1') }}</span>
+            <span>{{ $t('manager.box_2_str_2') }}</span>
           </p>
-          <router-link class="btn-serv orange-btn" :to="{ name: 'invoices'}">Pakiety usług</router-link>
+          <router-link class="btn-serv orange-btn" :to="{ name: 'invoices'}">{{ $t('manager.btn_2')}}</router-link>
         </div>
       </div>
 
       <div class="box-service back-cons">
         <div class="serv-head blue-head">
-          <p>KONSULTACJE</p>
+          <p>{{ $t('manager.box_3_title') }}</p>
         </div>
         <div class="serv-body blue">
           <p class="desc">
-            <span>Konsultacje księgowe online.</span>
-            <span>Wszystkie odpowiedzi w jednym miejscu!</span>
+            <span>{{ $t('manager.box_3_str_1') }}</span>
+            <span>{{ $t('manager.box_3_str_2') }}</span>
           </p>
-          <router-link class="btn-serv blue-btn" :to="{ name: 'consult'}">Pakiety usług</router-link>
+          <router-link class="btn-serv blue-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
         </div>
       </div>
 
       <div class="box-service back-acc">
         <div class="serv-head purple-head">
-          <p>NASZYM KLIENTOM KSIĘGOWYM</p>
+          <p>{{ $t('manager.box_4_title') }}</p>
         </div>
         <div class="serv-body purple">
           <p class="desc">
-            <span>Już masz z nami umowę?</span>
-            <span>Korzystaj z kompleksowych rozwiązań!</span>
+            <span>{{ $t('manager.box_4_str_1') }}</span>
+            <span>{{ $t('manager.box_4_str_2') }}</span>
           </p>
-          <router-link class="btn-serv purple-btn" :to="{ name: 'consult'}">Pakiety usług</router-link>
+          <router-link class="btn-serv purple-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
         </div>
       </div>
 
       <div class="box-service back-docs">
         <div class="serv-head briz-head">
-          <p>E-DOKUMENTY</p>
+          <p>{{ $t('manager.box_5_title') }}</p>
         </div>
         <div class="serv-body briz">
           <p class="desc">
-            <span>Wypełnij online.</span>
-            <span>Dokumenty osobiste oraz biznesowe.</span>
+            <span>{{ $t('manager.box_5_str_1') }}</span>
+            <span class="b-span">{{ $t('manager.box_5_str_2') }}</span>
           </p>
-          <router-link class="btn-serv briz-btn" :to="{ name: 'consult'}">Dowiedz się więcej</router-link>
+          <router-link class="btn-serv briz-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_1')}}</router-link>
         </div>
       </div>
 
       <div class="box-service mia-start">
         <div class="serv-head laguna-head">
-          <p>MIA START</p>
+          <p>{{ $t('manager.box_6_title') }}</p>
         </div>
         <div class="serv-body laguna">
           <p class="desc">
-            <span>Chcesz zacząć własny biznes?</span>
-            <span>Zrób to w łatwy sposób! </span>
+            <span>{{ $t('manager.box_6_str_1') }}</span>
+            <span>{{ $t('manager.box_6_str_2') }}</span>
           </p>
-          <router-link class="btn-serv laguna-btn" :to="{ name: 'consult'}">Pakiety usług</router-link>
+          <router-link class="btn-serv laguna-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
         </div>
       </div>
 
       <div class="box-service back-sant">
         <div class="serv-head red-head">
-          <p>SANTANDER BANK POLSKA</p>
+          <p>{{ $t('manager.box_7_title') }}</p>
         </div>
         <div class="serv-body red">
           <p class="desc">
-            <span>Potrzebujesz kredytu lub leasingu?</span>
-            <span>Skorzystaj z oferty naszego partnera!</span>
+            <span>{{ $t('manager.box_7_str_1') }}</span>
+            <span>{{ $t('manager.box_7_str_2') }}</span>
           </p>
-          <router-link class="btn-serv red-btn" :to="{ name: 'consult'}">Dowiedz się więcej</router-link>
+          <router-link class="btn-serv red-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
         </div>
       </div>
 
@@ -109,11 +111,44 @@ export default {
 </script>
 
 <style scoped>
+.services{
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+.box-service{
+  background-position: bottom 15px left 15px;
+  background-repeat: no-repeat;
+  background-size: 60px;
+}
+
+.services>.box-service{
+  width: 100%;
+  max-width: 500px;
+  animation: wave 30s infinite linear;
+  font-size: 1.1rem;
+}
+.services-three{
+  width: 100%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+.services-three>.box-service{
+  width: 100%;
+  max-width: 32%;
+  animation: wave 30s infinite linear;
+  font-size: 1rem;
+}
 .serv-head{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 60px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: white;
-  line-height: 60px;
   font-weight: 700;
   text-align: center;
 }
@@ -241,7 +276,7 @@ export default {
 .serv-body .desc{
   margin: 30px auto 50px auto;
   text-align: center;
-  line-height: 2.2rem;
+  line-height: 1.8rem;
 }
 .serv-body .desc span{
   color: rgb(45, 55, 115);
@@ -258,8 +293,12 @@ export default {
   width: 160px;
   margin: 0 auto 30px auto;
   border-radius: 20px;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
+.h20{height: 20px; width: 100%}
 
+@media screen and (max-width: 1200px) {
+  .services-three>.box-service{max-width: 350px;}
+}
 
 </style>
