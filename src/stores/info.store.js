@@ -7,7 +7,6 @@ export const useInfoStore = defineStore({
     id: 'info',
     state: () => ({
         appLanguage: 'en',
-        // activeColor: "b-black"
         activeColor: "b-white"
     }),
     getters: {

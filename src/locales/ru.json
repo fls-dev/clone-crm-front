@@ -1,7 +1,6 @@
 {
   "main": {
-    "name_company": "MIA CONSULT GROUP Sp. z o.o.",
-    "login": "Авторизация"
+    "name_company": "MIA CONSULT GROUP Sp. z o.o."
   },
   "title_page" : {
     "consultation": "Консультация онлайн",
@@ -129,20 +128,24 @@
     "company_is_auth":"Связать компанию?"
   },
   "authorization": {
-    "forgot": "Forgot your password?",
+    "log_title": "Авторизация",
+    "btn_login": "Войти",
+    "forgot": "Забыли пароль?",
     "email": "E-mail",
-    "pass": "Password",
-    "no_acc": "Don't have an account yet? ",
-    "p_change": "Password change",
-    "enter_email": "Enter your E-mail to update your password:",
-    "btn_ch": "Change password",
-    "cancel": "Cancel",
-    "reg_title": "Registration",
-    "reg_sub_title": "Please register to connect to the service",
-    "reg_last_name": "Surname",
-    "reg_name": "Name",
-    "reg_rep_pass": "Repeat password",
-    "reg_phone": "Phone",
-    "btn_reg": "Register"
+    "pl_email": "E-mail или Login",
+    "pass": "Пароль",
+    "no_acc": "У Вас еще нет аккаунта? ",
+    "no_acc_2": "Регистрация",
+    "p_change": "Смена пароля",
+    "enter_email": "Введите свой E-mail, чтобы изменить пароль:",
+    "btn_ch": "Изменить пароль",
+    "cancel": "Отменить",
+    "reg_title": "Регистрация",
+    "reg_sub_title": "Для подключения услуги, пожалуйста, зарегистрируйтесь",
+    "reg_last_name": "Фамилия",
+    "reg_name": "Имя",
+    "reg_rep_pass": "Повторите пароль",
+    "reg_phone": "Телефон",
+    "btn_reg": "Зарегистрироваться"
   }
 }

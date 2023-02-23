@@ -1,66 +1,85 @@
 <template>
- <LanguageSwitch />
   <div class="background-login">
+    <div class="language">
+      <select @change="setLang($event)" v-model=lang>
+        <option value="en">EN</option>
+        <option value="pl">PL</option>
+        <option value="ru">RU</option>
+      </select>
+    </div>
+    <div></div>
     <div class="box-shadow">
-      <div class="logo"><span>C</span>LONE<span>CRM</span></div>
+      <router-link class="link-white" to="/"><div class="logo"><span>C</span>LONE<span>CRM</span></div></router-link>
       <div v-if="isLogin">
-        <p class="title">{{ $t("main.login") }}</p>
+        <p class="title">{{ $t("authorization.log_title") }}</p>
         <form class="login-form">
-          <label>Login</label>
-          <input type="email" :value="login" class="login">
-          <label>Password</label>
-          <input type="password" :value="password" class="password">
-          <button type="submit">Zaloguj się</button>
+          <label>{{ $t('authorization.email') }}</label>
+          <input type="email" :value="login" :placeholder="$t('authorization.pl_email')" class="login">
+          <label>{{ $t('authorization.pass') }}</label>
+          <input type="password" :value="password" :placeholder="$t('authorization.pass')" class="password">
+          <button type="submit">{{ $t('authorization.btn_login') }}</button>
         </form>
       </div>
 
       <div v-if="isForgot">
-        <p class="title-marg">Zmiana hasła</p>
-        <p class="sub-title">Wpisz swój adres E-mail, aby zmienić hasło:</p>
+        <p class="title-marg">{{ $t('authorization.p_change') }}</p>
+        <p class="sub-title">{{ $t('authorization.enter_email') }}</p>
         <form class="forgot-form">
-          <label>E-mail lub login</label>
+          <label>{{ $t('authorization.pl_email') }}</label>
           <input type="email" :value="login">
           <div class="register-box-btn">
-            <button class="btn-reg" type="submit">Zmienić hasło</button>
-            <button class="btn-cancel" @click="goLogin" type="button">Anuluj</button>
+            <button class="btn-reg" type="submit">{{ $t('authorization.btn_ch') }}</button>
+            <button class="btn-cancel" @click="goLogin" type="button">{{ $t('authorization.cancel')}}</button>
           </div>
         </form>
       </div>
 
       <div v-if="isRegister">
-        <p class="title-marg">Rejestracja</p>
-        <p class="sub-title">Zarejestruj się, aby połączyć się z serwisem</p>
+        <p class="title-marg">{{$t('authorization.reg_title')}}</p>
+        <p class="sub-title">{{$t('authorization.reg_sub_title')}}</p>
         <form class="register-form">
-          <label>Nazwisko <span>*</span></label>
+          <label>{{$t('authorization.reg_last_name')}}<span>*</span></label>
           <input type="text" :value="lastName">
-          <label>Imię <span>*</span></label>
+          <label>{{ $t('authorization.reg_name') }} <span>*</span></label>
           <input type="text" :value="firstName">
-          <label>E-mail <span>*</span></label>
+          <label>{{$t('authorization.email')}}<span>*</span></label>
           <input type="text" :value="emailRegister">
-          <label>Hasło <span>*</span></label>
+          <label>{{$t('authorization.pass')}} <span>*</span></label>
           <input type="password" :value="passwordR">
-          <label>Powtórz hasło <span>*</span></label>
+          <label>{{$t('authorization.reg_rep_pass')}}<span>*</span></label>
           <input type="password" :value="passwordR2">
-          <label>Telefon <span>*</span></label>
+          <label>{{$t('authorization.reg_phone')}} <span>*</span></label>
           <input type="text" :value="phone">
           <p class="little-text">Dokonując rejestracji, akceptujesz Regulamin crm.mcgroup.pl wraz z Polityką Prywatności
             i Cookies oraz zawierasz z MIA CONSULT GROUP Sp. z o.o. Umowę powierzenia przetwarzania danych osobowych.
           </p>
           <div class="register-box-btn">
-            <button class="btn-reg" type="submit">Zarejestrować</button>
-            <button class="btn-cancel" @click="goLogin" type="button">Anuluj</button>
+            <button class="btn-reg" type="submit">{{$t('authorization.btn_reg')}}</button>
+            <button class="btn-cancel" @click="goLogin" type="button">{{$t('authorization.cancel')}}</button>
           </div>
         </form>
       </div>
-      <p class="link-forgot" @click="goForgot">Nie pamiętasz hasła?</p>
-      <p v-if="isRegisterBtn">Nie masz jeszcze konta?<span class="register" @click="goRegister">Rejestracja</span></p>
+      <p class="link-forgot" @click="goForgot">{{ $t('authorization.forgot') }}</p>
+      <p v-if="isRegisterBtn">{{ $t('authorization.no_acc') }}<span class="register" @click="goRegister">{{ $t('authorization.no_acc_2') }}</span></p>
+    </div>
+    <div class="footer">
+      <div class="icon-pay">
+        <img src="@/assets/img/login/pay1.svg">
+        <img src="@/assets/img/login/pay2.svg">
+        <img src="@/assets/img/login/pay3.svg">
+        <img src="@/assets/img/login/pay4.svg">
+        <img src="@/assets/img/login/pay5.svg">
+      </div>
+     <p> 2022 © MIA CONSULT GROUP Sp. z o.o. | v3.2 | NIP: 1133018235 |Oferta |Regulamin |Cookies | Support: support@mcgroup.pl</p>
     </div>
   </div>
+
 </template>
 
 <script>
-import {useInfoStore} from "@/stores/info.store";
 import LanguageSwitch from "@/components/static/LanguageSwitch.vue";
+import i18n from "@/locales/i18n";
+import {useInfoStore} from "@/stores/info.store";
 
 export default {
   name: "Login",
@@ -81,6 +100,7 @@ export default {
       isForgot: false,
       isRegister: false,
       isRegisterBtn: true,
+      lang: i18n.global.locale
     }
   },
   methods: {
@@ -101,7 +121,13 @@ export default {
       this.isRegister = false
       this.isForgot = true
       this.isRegisterBtn = true
-    }
+    },
+    setLang(event){
+      useInfoStore().setAppLanguage(event.target.value)
+    },
+  },
+  mounted() {
+    i18n.global.locale.value = useInfoStore().getAppLanguage
   }
 };
 </script>
@@ -124,9 +150,14 @@ export default {
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  background: #fff;
+  //background: #fff;
+  background-image: url(@/assets/img/login/back_l.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:  center center;
 }
 
 .box-shadow {
@@ -137,6 +168,7 @@ export default {
   -webkit-box-shadow: 0px 5px 10px 2px rgba(168, 179, 187, 0.94);
   -moz-box-shadow: 0px 5px 10px 2px rgba(168, 179, 187, 0.94);
   box-shadow: 0px 5px 10px 2px rgba(168, 179, 187, 0.94);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .login-form {
@@ -161,7 +193,7 @@ export default {
   display: block;
   width: 100%;
   min-width: 300px;
-  max-width: 300px;
+  //max-width: 300px;
   height: 35px;
   border-radius: 5px;
   border: 1px solid #c4c4c4;
@@ -195,7 +227,7 @@ export default {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 .background-login .title {
   color: var(--main-color);
@@ -226,7 +258,7 @@ export default {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .btn-cancel {
@@ -257,4 +289,60 @@ export default {
 }
 .logo {margin: 20px auto;}
 
+.language{
+  position: fixed;
+  top: 20px;
+  right: 50px;
+}
+.language select{
+  outline: none;
+  appearance: none;
+  background-color: transparent;
+  padding: 8px;
+  margin: 0;
+  width: 35px;
+  height: 35px;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: inherit;
+  //color: #000;
+  //border: 1px solid #000;
+  color: #fff;
+  border: 1px solid #fff;
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.icon-pay img{width: 50px}
+.icon-pay{
+  display: flex;
+  justify-content: center;
+  column-gap: 7px;
+  margin: 0 auto 15px auto;
+}
+.footer{text-align: center}
+.footer p{color: #fff; font-size: .9rem}
+.link-white {
+  color: #313131;
+}
+
+@media screen and (max-width: 500px){
+  .box-shadow{padding: 15px; margin-bottom: 20px}
+  .background-login {min-height: 100%; height: auto}
+  .register-form input,.forgot-form input,.login-form input {min-width: auto; box-sizing: border-box}
+  .register-form,.forgot-form,.login-form{
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .sub-title{font-size: 0.7rem}
+  .language {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+  .language select{
+    color: #000;
+    border: 1px solid #000;
+  }
+}
 </style>

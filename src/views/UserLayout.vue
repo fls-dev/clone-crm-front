@@ -28,7 +28,7 @@
 
 import Manager from "@/components/user/pages/Manager.vue";
 import Consultations from "@/components/user/pages/Consultation.vue";
-import UserMenu from "@/components/user/UserMenu.vue";
+import UserMenu from "@/components/static/UserMenu.vue";
 import HeaderUser from "@/components/user/HeaderUser.vue";
 import LogoBox from "@/components/static/LogoBox.vue";
 import {useUsersStore} from "@/stores";

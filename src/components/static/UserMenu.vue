@@ -1,7 +1,8 @@
 <template>
   <div class="user-menu" :class="color">
 <!--  <div class="user-menu b-white">-->
-    <router-link class="item-menu" :to="{ name: 'dashboard'}">
+<!--    <router-link class="item-menu" :to="{ name: 'dashboard'}">-->
+    <router-link class="item-menu" to="/">
       <i class="fa-light fa-puzzle-piece"></i>
       <span>{{ $t("menuUser.manager") }}</span>
     </router-link>
@@ -17,17 +18,17 @@
         <i class="fa-light fa-address-card"></i>
         <span>{{ $t("menuUser.company") }}</span>
       </router-link>
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
         <i class="fa-light fa-users"></i>
         <span>{{ $t("menuUser.employees") }}</span>
       </router-link>
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
         <i class="fa-light fa-crate-empty"></i>
         <span>{{ $t("menuUser.tax") }}</span>
       </router-link>
     </div>
 
-    <router-link class="item-menu" to="">
+    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-cloud"></i>
       <span>{{ $t("menuUser.tax") }}</span>
     </router-link>
@@ -41,11 +42,11 @@
       <i class="fa-light fa-chevron-down"></i>
     </div>
     <div data-menu="webinars" class="sub-item-menu none">
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
         <i class="fa-light fa-calendar-days"></i>
         <span>{{ $t("menuUser.future") }}</span>
       </router-link>
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
         <i class="fa-light fa-clapperboard-play"></i>
         <span>{{ $t("menuUser.recordings") }}</span>
       </router-link>
@@ -66,15 +67,15 @@
       <i class="fa-light fa-chevron-down"></i>
     </div>
     <div data-menu="invoice" class="sub-item-menu none">
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'dashboard'}">
         <i class="fa-light fa-file-invoice"></i>
         <span>{{ $t("menuUser.invoice") }}</span>
       </router-link>
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
         <i class="fa-light fa-list-ul"></i>
         <span>{{ $t("menuUser.list-service") }}</span>
       </router-link>
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
         <i class="fa-light fa-user-tie-hair"></i>
         <span>{{ $t("menuUser.contractors") }}</span>
       </router-link>
@@ -90,28 +91,28 @@
       <i class="fa-light fa-chevron-down"></i>
     </div>
     <div data-menu="e-doc" class="sub-item-menu none">
-      <router-link class="item-menu" to="">
+      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
         <i class="fa-light fa-print"></i>
         <span>{{ $t("menuUser.e-doc") }}</span>
       </router-link>
     </div>
 
 
-    <router-link class="item-menu" to="">
+    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-folders"></i>
       <span>{{ $t("menuUser.additional") }}</span>
     </router-link>
 
-    <router-link class="item-menu" to="">
+    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-gamepad-modern"></i>
       <span>{{ $t("menuUser.take-a-break") }}</span>
     </router-link>
-    <router-link class="item-menu" to="">
+    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-phone-plus"></i>
       <span>{{ $t("menuUser.support") }}</span>
     </router-link>
 
-    <router-link class="item-menu" to="">
+    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-rocket-launch"></i>
       <span>{{ $t("menuUser.mia-start") }}</span>
     </router-link>
@@ -196,6 +197,9 @@ export default {
 
 .item-menu-has-children * {
   pointer-events: none
+}
+.router-link-active{
+  background: red!important;
 }
 
 </style>

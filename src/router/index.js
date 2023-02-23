@@ -2,14 +2,25 @@ import {createRouter, createWebHistory} from 'vue-router'
 import Login from "@/views/Login.vue";
 import LayoutAdmin from "@/views/UserLayout.vue";
 import i18n from "@/locales/i18n";
+import {useAuthStore} from "@/stores";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',
+            name: 'start',
+            redirect: { name: 'Login' },
+        },
+        {
+            path: '/:pathMatch(.*)',
+            component: () => import('@/views/NotFound.vue'),
+        },
+        {
+            path: '/login',
             name: 'Login',
-            component: Login
+            component: Login,
+            requiresAuth: false
         },
         {
             path: '/user',
@@ -57,10 +68,8 @@ const router = createRouter({
     ]
 })
 // router.beforeEach((to) => {
-//     // ✅ This will work make sure the correct store is used for the
-//     // current running app
-//     const main = useMainStore(pinia)
-//
-//     if (to.meta.requiresAuth && !main.isLoggedIn) return '/login'
+//     const auth = useAuthStore()
+//     if (to.meta.requiresAuth && !auth.isLoggedIn) return '/login'
 // })
+
 export default router

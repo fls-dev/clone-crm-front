@@ -1,7 +1,6 @@
 {
   "main": {
-    "name_company": "MIA CONSULT GROUP Sp. z o.o.",
-    "login": "Logowanie"
+    "name_company": "MIA CONSULT GROUP Sp. z o.o."
   },
   "title_page" : {
     "consultation": "Konsultacje online",
@@ -128,20 +127,24 @@
     "company_is_auth":"Połączyć firmę?"
   },
   "authorization": {
-    "forgot": "Forgot your password?",
+    "log_title": "Logowanie",
+    "btn_login": "Zaloguj się",
+    "forgot": "Nie pamiętasz hasła?",
     "email": "E-mail",
-    "pass": "Password",
-    "no_acc": "Don't have an account yet? ",
-    "p_change": "Password change",
-    "enter_email": "Enter your E-mail to update your password:",
-    "btn_ch": "Change password",
-    "cancel": "Cancel",
-    "reg_title": "Registration",
-    "reg_sub_title": "Please register to connect to the service",
-    "reg_last_name": "Surname",
-    "reg_name": "Name",
-    "reg_rep_pass": "Repeat password",
-    "reg_phone": "Phone",
-    "btn_reg": "Register"
+    "pl_email": "E-mail lub Login",
+    "pass": "Hasło",
+    "no_acc": "Nie masz jeszcze konta? ",
+    "no_acc_2": "Rejestracja",
+    "p_change": "Zmiana hasła",
+    "enter_email": "Wpisz swój adres E-mail, aby zmienić hasło:",
+    "btn_ch": "Zmienić hasło",
+    "cancel": "Anuluj",
+    "reg_title": "Rejestracja",
+    "reg_sub_title": "Zarejestruj się, aby połączyć się z serwisem",
+    "reg_last_name": "Nazwisko",
+    "reg_name": "Imię",
+    "reg_rep_pass": "Powtórz hasło",
+    "reg_phone": "Telefon",
+    "btn_reg": "Zarejestrować"
   }
 }

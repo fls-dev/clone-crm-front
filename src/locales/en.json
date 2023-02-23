@@ -1,7 +1,6 @@
 {
   "main": {
-    "name_company": "MIA CONSULT GROUP Sp. z o.o.",
-    "login": "Autorization"
+    "name_company": "MIA CONSULT GROUP Sp. z o.o."
   },
   "title_page" : {
     "consultation": "Online consultations",
@@ -130,12 +129,16 @@
     "company_is_auth":"Company authorization?"
   },
   "authorization": {
+    "log_title": "Authorization",
+    "btn_login": "Login",
     "forgot": "Forgot your password?",
     "email": "E-mail",
+    "pl_email": "E-mail or Login",
     "pass": "Password",
     "no_acc": "Don't have an account yet? ",
+    "no_acc_2": "Registration",
     "p_change": "Password change",
-    "enter_email": "Enter your E-mail to update your password:",
+    "enter_email": "Enter your E-mail or Login to update your password:",
     "btn_ch": "Change password",
     "cancel": "Cancel",
     "reg_title": "Registration",
