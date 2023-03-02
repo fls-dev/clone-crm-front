@@ -1,8 +1,13 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Login from "@/views/Login.vue";
 import LayoutAdmin from "@/views/UserLayout.vue";
-import i18n from "@/locales/i18n";
+
+
+
 import {useAuthStore} from "@/stores";
+import {messages} from "@/locales/i18n";
+import {useInfoStore} from "@/stores/info.store";
+
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,7 +15,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'start',
-            redirect: { name: 'Login' },
+            redirect: { name: 'login' },
         },
         {
             path: '/:pathMatch(.*)',
@@ -18,9 +23,12 @@ const router = createRouter({
         },
         {
             path: '/login',
-            name: 'Login',
+            name: 'login',
             component: Login,
-            requiresAuth: false
+            meta: {
+                requiresAuth: false,
+                title: "login"
+            },
         },
         {
             path: '/user',
@@ -33,7 +41,8 @@ const router = createRouter({
                     component: () => import('@/components/user/pages/Manager.vue'),
                     meta: {
                         iconPage:"fa-puzzle-piece",
-                        requiresAuth: true
+                        requiresAuth: true,
+                        title: "dashboard"
                     },
                 },
                 {
@@ -42,6 +51,7 @@ const router = createRouter({
                     component: () => import('@/components/user/pages/Consultation.vue'),
                     meta: {
                         iconPage:"fa-comments-question-check",
+                        title: "consultation",
                         requiresAuth: true
                     },
                 },
@@ -51,6 +61,17 @@ const router = createRouter({
                     component: () => import('@/components/user/pages/MyCompanyNoClient.vue'),
                     meta: {
                         iconPage:"fa-address-card",
+                        title: "company",
+                        requiresAuth: true
+                    },
+                },
+                {
+                    path: 'company-client',
+                    name: 'company-client',
+                    component: () => import('@/components/user/pages/MyCompanyClient.vue'),
+                    meta: {
+                        iconPage:"fa-address-card",
+                        title: "company",
                         requiresAuth: true
                     },
                 },
@@ -60,6 +81,7 @@ const router = createRouter({
                     component: () => import('@/components/user/pages/Invoices.vue'),
                     meta: {
                         iconPage:"fa-file-invoice",
+                        title: "invoices",
                         requiresAuth: true
                     },
                 },
@@ -67,9 +89,11 @@ const router = createRouter({
         }
     ]
 })
-// router.beforeEach((to) => {
-//     const auth = useAuthStore()
-//     if (to.meta.requiresAuth && !auth.isLoggedIn) return '/login'
-// })
+
+router.beforeEach((to) => {
+    const auth = useAuthStore();
+    document.title = messages[useInfoStore().getAppLanguage].title_page[to.meta.title]
+    // if (to.meta.requiresAuth && to.name !== "Login") return '/login';
+})
 
 export default router

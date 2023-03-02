@@ -1,6 +1,6 @@
 <template>
   <div class="page-head">
-    <h1 class="title-page"><i class="fa-light" :class=this.$route.meta.iconPage></i> {{$t("menuUser.manager")}}</h1>
+    <h1 class="title-page"><i class="fa-light" :class=this.$route.meta.iconPage></i> {{$t("title_page.dashboard")}}</h1>
   </div>
   <div class="body-content">
     <div class="services">

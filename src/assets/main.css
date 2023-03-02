@@ -2,6 +2,9 @@
     --main-color: #0070BB;
     --active-color: rgb(0, 142, 135);
     --font-color: #646c9a;
+    --btn-back-first: rgb(0, 142, 135);
+    --btn-back-second: #3D7C98;
+    --btn-back-third: #646c9a;
     --width-sidebar: 300px;
 }
 .none{display: none!important;}
@@ -24,9 +27,11 @@ a{text-decoration: none}
 }
 .center{text-align:center}
 
+.mb-5{margin-bottom: 5px}
 .mb-10{margin-bottom: 10px}
 .mb-15{margin-bottom: 15px}
 .mb-20{margin-bottom: 20px}
+.mb-25{margin-bottom: 25px}
 .mb-30{margin-bottom: 30px}
 .mr-15{margin-right: 15px}
 .h30{height: 30px; width: 100%}

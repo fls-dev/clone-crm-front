@@ -4,7 +4,6 @@
   <div class="header-menu-h"></div>
   <div class="main-layout">
     <div class="sidebar" :class="color">
-<!--    <div class="sidebar b-white">-->
       <UserMenu />
     </div>
     <div class="content">
@@ -16,30 +15,23 @@
       </div>
     </div>
   </div>
-<!--    <div class="footer">-->
-<!--      2022 © MIA CONSULT GROUP Sp. z o.o. | v3.2 | NIP: 1133018235 |Oferta |Regulamin |Cookies | Support: support@mcgroup.pl-->
-<!--    </div>-->
   </div>
 
 </template>
 
 <script>
 
-
-import Manager from "@/components/user/pages/Manager.vue";
-import Consultations from "@/components/user/pages/Consultation.vue";
 import UserMenu from "@/components/static/UserMenu.vue";
 import HeaderUser from "@/components/user/HeaderUser.vue";
-import LogoBox from "@/components/static/LogoBox.vue";
 import {useUsersStore} from "@/stores";
 import {useInfoStore} from "@/stores/info.store";
 
 export default {
   name: "LayoutAdmin",
-  components: {LogoBox, HeaderUser, UserMenu, Manager,Consultations},
+  components: { HeaderUser, UserMenu},
   data() {
     return {
-
+      previousTitle: document.title
     }
   },
   computed: {
@@ -51,7 +43,12 @@ export default {
 
   },
   mounted() {
-    // console.log(this.$route)
+    window.addEventListener('blur', () => {
+      document.title = "😭 Please come back!"
+    });
+    window.addEventListener('focus', () => {
+      document.title = this.previousTitle;
+    });
   }
 }
 </script>

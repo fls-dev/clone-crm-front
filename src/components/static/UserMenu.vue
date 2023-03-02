@@ -2,7 +2,7 @@
   <div class="user-menu" :class="color">
 <!--  <div class="user-menu b-white">-->
 <!--    <router-link class="item-menu" :to="{ name: 'dashboard'}">-->
-    <router-link class="item-menu" to="/">
+    <router-link class="item-menu" :to="{ name: 'dashboard'}">
       <i class="fa-light fa-puzzle-piece"></i>
       <span>{{ $t("menuUser.manager") }}</span>
     </router-link>
@@ -14,7 +14,7 @@
       <i class="fa-light fa-chevron-down"></i>
     </div>
     <div data-menu="company" class="sub-item-menu none">
-      <router-link class="item-menu" :to="{ name: 'company-no-client'}">
+      <router-link class="item-menu" :to="{ name: 'company-client'}">
         <i class="fa-light fa-address-card"></i>
         <span>{{ $t("menuUser.company") }}</span>
       </router-link>
@@ -30,7 +30,7 @@
 
     <router-link class="item-menu" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-cloud"></i>
-      <span>{{ $t("menuUser.tax") }}</span>
+      <span>{{ $t("menuUser.cloud") }}</span>
     </router-link>
 
     <!--   sub   -->

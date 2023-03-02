@@ -123,7 +123,7 @@ export default {
       this.isRegisterBtn = true
     },
     setLang(event){
-      useInfoStore().setAppLanguage(event.target.value)
+      useInfoStore().setAppLanguage(event.target.value,this.$route.meta.title)
     },
   },
   mounted() {
@@ -222,7 +222,7 @@ export default {
 
 .login-form button {
   padding: 5px 15px;
-  background: var(--active-color);
+  background: var(--btn-back-first);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -253,7 +253,7 @@ export default {
 
 .btn-reg {
   padding: 5px 15px;
-  background: var(--active-color);
+  background: var(--btn-back-first);
   color: #fff;
   border: none;
   border-radius: 5px;

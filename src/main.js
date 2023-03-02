@@ -8,12 +8,12 @@ import './assets/main.css'
 import i18n from "@/locales/i18n";
 
 
+
 const app = createApp(App)
 app.use(pinia)
 pinia.use(piniaPluginPersistedstate);
 app.use(router)
 app.use(i18n)
-
 
 
 

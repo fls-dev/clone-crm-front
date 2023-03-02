@@ -3,7 +3,7 @@
     <h1 class="title-page"><i class="fa-light" :class=this.$route.meta.iconPage></i> {{ $t("title_page.invoices") }}</h1>
   </div>
   <div class="body-content">
-    <h2 class="title-h2">{{ $t("invoices-rate.title") }}</h2>
+    <h2 class="title-h2">{{ $t("title_page.invoices") }}</h2>
 
     <div class="show-hide" @click="isShow($event)" data-show-hide="title1">
       <i class="fa-light fa-angles-right"></i>

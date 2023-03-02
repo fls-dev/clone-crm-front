@@ -4,15 +4,22 @@ import en from "@/locales/en.json";
 import ru from "@/locales/ru.json";
 
 
-const i18n = createI18n({
+export default createI18n({
     legacy: false,
-    sync: true,
+    locale: 'en',
     globalInjection: true,
-    locale: "en",
-    fallbackLocale: "en",
-    formatFallbackMessages: true,
-    availableLocales: ["en", "pl", "ru"],
     messages: { pl, en, ru },
-
-});
-export default i18n
+})
+export const messages = { pl, en, ru }
+// const i18n = createI18n({
+//     legacy: false,
+//     sync: false,
+//     globalInjection: true,
+//     locale: "en",
+//     fallbackLocale: "en",
+//     formatFallbackMessages: true,
+//     availableLocales: ["en", "pl", "ru"],
+//     messages: { pl, en, ru },
+//
+// });
+// export default i18n

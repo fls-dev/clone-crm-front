@@ -98,7 +98,7 @@ export default {
 }
 .top-head button, .section-input-bottom button{
   padding: 10px 15px;
-  background: var(--active-color);
+  background: var(--btn-back-second);
   color: #fff;
   font-size: 0.8rem;
   line-height: 0.8rem;

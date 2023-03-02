@@ -22,7 +22,7 @@ export default {
   },
   methods:{
     setLang(event){
-      useInfoStore().setAppLanguage(event.target.value)
+      useInfoStore().setAppLanguage(event.target.value, this.$route.meta.title)
     },
   },
   mounted() {

@@ -1,4 +1,6 @@
 import {defineStore} from 'pinia';
+import {messages} from "@/locales/i18n";
+import router from "@/router";
 
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/users`;
@@ -14,7 +16,8 @@ export const useInfoStore = defineStore({
         getActiveColor: (state) => state.activeColor
     },
     actions: {
-        setAppLanguage(language) {
+        setAppLanguage(language, route = "default") {
+            document.title=messages[language].title_page[route]
             this.appLanguage = language;
         },
         setActiveColor(color) {
