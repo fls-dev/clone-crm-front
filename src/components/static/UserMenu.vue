@@ -2,7 +2,7 @@
   <div class="user-menu" :class="color">
 <!--  <div class="user-menu b-white">-->
 <!--    <router-link class="item-menu" :to="{ name: 'dashboard'}">-->
-    <router-link class="item-menu" :to="{ name: 'dashboard'}">
+    <router-link class="item-menu" @click="hideAllSubDiv" :to="{ name: 'dashboard'}">
       <i class="fa-light fa-puzzle-piece"></i>
       <span>{{ $t("menuUser.manager") }}</span>
     </router-link>
@@ -28,7 +28,7 @@
       </router-link>
     </div>
 
-    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
+    <router-link class="item-menu" @click="hideAllSubDiv" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-cloud"></i>
       <span>{{ $t("menuUser.cloud") }}</span>
     </router-link>
@@ -52,7 +52,7 @@
       </router-link>
     </div>
 
-    <router-link class="item-menu" :to="{ name: 'consultation'}">
+    <router-link class="item-menu" @click="hideAllSubDiv" :to="{ name: 'consultation'}">
       <i class="fa-light fa-comments-question-check"></i>
       <span>{{ $t("menuUser.consult") }}</span>
     </router-link>
@@ -98,21 +98,21 @@
     </div>
 
 
-    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
+    <router-link class="item-menu" @click="hideAllSubDiv" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-folders"></i>
       <span>{{ $t("menuUser.additional") }}</span>
     </router-link>
 
-    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
+    <router-link class="item-menu" @click="hideAllSubDiv" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-gamepad-modern"></i>
       <span>{{ $t("menuUser.take-a-break") }}</span>
     </router-link>
-    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
+    <router-link class="item-menu" @click="hideAllSubDiv" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-phone-plus"></i>
       <span>{{ $t("menuUser.support") }}</span>
     </router-link>
 
-    <router-link class="item-menu" :to="{ name: 'company-no-client'}">
+    <router-link class="item-menu" @click="hideAllSubDiv" :to="{ name: 'company-no-client'}">
       <i class="fa-light fa-rocket-launch"></i>
       <span>{{ $t("menuUser.mia-start") }}</span>
     </router-link>
@@ -135,18 +135,33 @@ export default {
       const target = event.target;
       target.childNodes[1].classList.toggle('fa-rotate-180');
       const all = document.querySelectorAll('.sub-item-menu');
-      const l = all.length
+      const l = all.length;
       for (let i = 0; i < l; i++) {
         if (all[i].dataset.menu === target.dataset.parent) {
-          all[i].classList.toggle('none')
+          all[i].classList.toggle('none');
         } else {
           all[i].previousElementSibling.childNodes[1].classList.remove('fa-rotate-180');
-          all[i].classList.add('none')
+          all[i].classList.add('none');
         }
+      }
+    },
+    hideAllSubDiv(){
+      const all = document.querySelectorAll('.sub-item-menu');
+      const l = all.length;
+      for (let i = 0; i < l; i++) {
+        all[i].previousElementSibling.childNodes[1].classList.remove('fa-rotate-180');
+        all[i].classList.add('none');
       }
     }
   },
   mounted() {
+    const link = document.querySelector('.router-link-active:not(.link-white)');
+    if(link){
+      if(link.parentElement.previousElementSibling && link.parentElement.previousElementSibling.classList.contains('item-menu-has-children')){
+        link.parentElement.previousElementSibling.childNodes[1].classList.add('fa-rotate-180');
+        link.parentElement.classList.remove('none')
+      }
+    }
   }
 }
 </script>
@@ -199,7 +214,8 @@ export default {
   pointer-events: none
 }
 .router-link-active{
-  background: red!important;
+  background: var(--active-color);
+  color: #fff;
 }
 
 </style>

@@ -9,8 +9,8 @@
 <!-- name_company   -->
     <div class="line">
       <div class="l-inp">
-        <label>{{ $t('company.name_company') }}</label>
-          <input type="text" :value="name_company" disabled>
+        <label>{{ $t('company.type_of_ownership') }}</label>
+          <input type="text" :value="type_of_ownership" disabled>
       </div>
       <div class="r-inp">
         <label>{{ $t('company.personnel_VAT') }}</label>
@@ -32,133 +32,125 @@
         <input type="text" :value="nip" disabled>
       </div>
       <div class="r-inp">
-        <label>{{ $t('company.personnel_VAT') }}</label>
-        <input type="text" :value="personnel_VAT" disabled>
+        <label>{{ $t('company.tax_system') }}</label>
+        <input type="text" :value="not_specified" disabled>
+      </div>
+    </div>
+<!-- company   -->
+    <div class="line">
+      <div class="l-inp">
+        <label>{{ $t('company.name_company') }}</label>
+        <input type="text" :value="name_company" disabled>
+      </div>
+      <div class="r-inp">
+        <label>{{ $t('company.krs') }}</label>
+        <input type="text" :value="krs" disabled>
+      </div>
+    </div>
+<!-- Street   -->
+    <div class="line">
+      <div class="l-inp">
+        <div class="line-three-inp">
+          <div>
+            <label>{{ $t('company.street') }}</label>
+            <input type="text" :value="street" disabled>
+          </div>
+          <div>
+            <label>{{ $t('company.house') }}</label>
+            <input type="text" :value="house" disabled>
+          </div>
+          <div class="not-mb">
+            <label>{{ $t('company.apartment') }}</label>
+            <input type="text" :value="apartment" disabled>
+          </div>
+        </div>
+      </div>
+      <div class="r-inp">
+        <label>REGON</label>
+        <input type="text" :value="regon" disabled>
+      </div>
+    </div>
+<!-- Street   -->
+    <div class="line">
+      <div class="l-inp">
+        <div class="line-three-inp">
+          <div>
+            <label>{{ $t('company.index') }}</label>
+            <input type="text" :value="index" disabled>
+          </div>
+          <div>
+            <label>{{ $t('company.city') }}</label>
+            <input type="text" :value="city" disabled>
+          </div>
+          <div class="not-mb">
+            <label>{{ $t('company.country') }}</label>
+            <input type="text" :value="country" disabled>
+          </div>
+        </div>
+      </div>
+      <div class="r-inp">
+        <label>{{ $t('company.phone') }}</label>
+        <input type="text" :value="phone" disabled>
+      </div>
+    </div>
+<!-- Surname   -->
+    <div class="line">
+      <div class="l-inp">
+        <label>{{ $t('company.surname') }}</label>
+        <input type="text" :value="surname" disabled>
+      </div>
+      <div class="r-inp">
+        <label>{{ $t('company.add_phone') }}</label>
+        <input type="text" :value="add_phone" disabled>
+      </div>
+    </div>
+<!-- name   -->
+    <div class="line">
+      <div class="l-inp">
+        <label>{{ $t('company.name') }}</label>
+        <input type="text" :value="name" disabled>
+      </div>
+      <div class="r-inp">
+        <label>E-mail</label>
+        <input type="text" :value="email" disabled>
       </div>
     </div>
 
 
-    <hr>
-    <div class="section-company">
+    <p class="title-com">{{ $t('company.t_commercial') }}</p>
 
-
-      <div class="section-input">
-        <label>{{ $t('company.name_company') }}</label>
-        <input type="text" :value="name_company" disabled>
-        <label>{{ $t('company.type_of_ownership') }}</label>
-        <input type="text" :value="type_of_ownership" disabled>
-        <label>{{ $t('company.nip') }}</label>
-        <input type="text" :value="nip" disabled>
-
-        <div class="line-three-inp">
-          <div>
-            <label>{{ $t('company.street') }}</label>
-            <input type="text" :value="street" disabled>
-          </div>
-          <div>
-            <label>{{ $t('company.house') }}</label>
-            <input type="text" :value="house" disabled>
-          </div>
-          <div>
-            <label>{{ $t('company.apartment') }}</label>
-            <input type="text" :value="apartment" disabled>
-          </div>
+<!-- contract_number   -->
+      <div class="line">
+        <div class="l-inp">
+          <label>{{ $t('company.contract_number') }}</label>
+          <input type="text" :value="contract_number" disabled>
         </div>
-
-        <div class="line-three-inp">
-          <div>
-            <label>{{ $t('company.index') }}</label>
-            <input type="text" :value="index" disabled>
-          </div>
-          <div>
-            <label>{{ $t('company.city') }}</label>
-            <input type="text" :value="city" disabled>
-          </div>
-          <div>
-            <label>{{ $t('company.country') }}</label>
-            <input type="text" :value="country" disabled>
-          </div>
+        <div class="r-inp">
+          <label>{{ $t('company.contract_pay_date') }}</label>
+          <input type="text" :value="contract_pay_date" disabled>
         </div>
+      </div>
 
-        <label>{{ $t('company.surname') }}</label>
-        <input type="text" :value="surname" disabled>
-
-        <label>{{ $t('company.name') }}</label>
-        <input type="text" :value="name" disabled>
-        <p class="title-com">{{ $t('company.t_commercial') }}</p>
-
-        <label>{{ $t('company.contract_number') }}</label>
-        <input type="text" :value="contract_number" disabled>
-
+<!-- service_cost   -->
+    <div class="line">
+      <div class="l-inp">
         <label>{{ $t('company.service_cost') }}</label>
         <input type="text" :value="service_cost" disabled>
-
+      </div>
+      <div class="r-inp">
+        <label>{{ $t('company.payment_form') }}</label>
+        <input type="text" :value="payment_form" disabled>
+      </div>
+    </div>
+<!-- service_cost   -->
+    <div class="line">
+      <div class="l-inp">
         <label>{{ $t('company.bank_details') }}</label>
         <input type="text" :value="bank_details" disabled>
       </div>
-      <div class="section-input">
-          <label>{{ $t('company.personnel_VAT') }}</label>
-        <div class="mb-30">
-          <label class="check-lab"><input class="checkbox" type="checkbox" :value="personnel_VAT">
-            VAT
-          </label>
-          <label class="check-lab"><input class="checkbox" type="checkbox" :value="personnel_VAT">
-            VAT UE
-          </label>
-          <label class="check-lab"><input class="checkbox" type="checkbox" :value="personnel_VAT">
-            {{ $t('company.employees') }}
-          </label>
-        </div>
-        <label>{{ $t('company.type_of_ownership') }}</label>
-        <input type="text" :value="type_of_ownership" disabled>
-        <label>{{ $t('company.nip') }}</label>
-        <input type="text" :value="nip" disabled>
-
-        <div class="line-three-inp">
-          <div>
-            <label>{{ $t('company.street') }}</label>
-            <input type="text" :value="street" disabled>
-          </div>
-          <div>
-            <label>{{ $t('company.house') }}</label>
-            <input type="text" :value="house" disabled>
-          </div>
-          <div>
-            <label>{{ $t('company.apartment') }}</label>
-            <input type="text" :value="apartment" disabled>
-          </div>
-        </div>
-
-        <div class="line-three-inp">
-          <div>
-            <label>{{ $t('company.index') }}</label>
-            <input type="text" :value="index" disabled>
-          </div>
-          <div>
-            <label>{{ $t('company.city') }}</label>
-            <input type="text" :value="city" disabled>
-          </div>
-          <div>
-            <label>{{ $t('company.country') }}</label>
-            <input type="text" :value="country" disabled>
-          </div>
-        </div>
-
-        <label>{{ $t('company.surname') }}</label>
-        <input type="text" :value="surname" disabled>
-
-        <label>{{ $t('company.name') }}</label>
-        <input type="text" :value="name" disabled>
-        <p class="title-com">{{ $t('company.t_commercial') }}</p>
-
-        <label>{{ $t('company.contract_number') }}</label>
-        <input type="text" :value="contract_number" disabled>
-
-        <label>{{ $t('company.service_cost') }}</label>
-        <input type="text" :value="service_cost" disabled>
-
-        <label>{{ $t('company.bank_details') }}</label>
-        <input type="text" :value="bank_details" disabled>
+      <div class="r-inp">
+        <label>{{ $t('company.bank_name') }}</label>
+        <input type="text" :value="bank_name" disabled>
       </div>
     </div>
     <div class="section-input-bottom">
@@ -174,6 +166,7 @@ export default {
     return {
       name_company: "Mia Consult Group",
       nip: "1000000032",
+      not_specified: "not_specified",
       address: "",
       index: "",
       city: "",
@@ -189,22 +182,21 @@ export default {
       surname: "Surname",
       name: "Pavel",
       contract_number: "contract_number",
+      contract_pay_date: "10",
       service_cost: "service_cost",
-      personnel_VAT: ""
+      personnel_VAT: "",
+      krs: "krs",
+      regon: "regon",
+      phone:"phone",
+      add_phone:"add_phone",
+      email:"email",
+      payment_form: "cash"
     }
   }
 }
 </script>
 
 <style scoped>
-.section-company{
-  display: flex;
-  gap: 30px;
-}
-.section-input{
-  width: 100%;
-  max-width: 50%;
-}
 .section-input input:not([type="checkbox"]){
   padding: 0px 15px;
   margin-bottom: 30px;
@@ -263,22 +255,6 @@ export default {
   width: 100%;
   max-width: 32%;
 }
-@media screen and (max-width: 770px) {
-  .section-input{
-    max-width: 100%;
-  }
-}
-@media screen and (max-width: 500px) {
-  .line-three-inp{flex-wrap: wrap}
-  .line-three-inp div{max-width: 100%}
-  .section-input-bottom{text-align: center}
-}
-@media screen and (max-width: 400px) {
-  .top-head h2{ margin: 0 0 15px 0; display: block;text-align: center; width: 100%}
-  .top-head{justify-content: center}
-}
-</style>
-<style scoped>
 .line{
   display: flex;
   gap: 30px;
@@ -314,5 +290,29 @@ export default {
   cursor: pointer;
   display: block;
   margin: 0 15px 0 0;
+  font-size: .8rem;
 }
+
+@media screen and (max-width: 770px) {
+  .l-inp, .r-inp{
+    max-width: 100%;
+  }
+  .title-com{
+    font-size: 1.2rem;
+    margin: 15px 0;
+  }
+  .line{margin-bottom: 15px;gap: 15px;}
+  .line-three-inp,.line{flex-wrap: wrap}
+  .line-three-inp div:not(.not-mb){max-width: 100%; margin-bottom: 15px;}
+  .line-three-inp div{max-width: 100%;}
+    .section-input-bottom{text-align: center}
+}
+
+@media screen and (max-width: 400px) {
+  .top-head h2{ margin: 0 0 15px 0; display: block;text-align: center; width: 100%}
+  .top-head{justify-content: center}
+}
+</style>
+<style scoped>
+
 </style>
