@@ -80,6 +80,7 @@
 import LanguageSwitch from "@/components/static/LanguageSwitch.vue";
 import i18n from "@/locales/i18n";
 import {useInfoStore} from "@/stores/info.store";
+// import {setConfig} from "../../set-config";
 
 export default {
   name: "Login",
@@ -128,6 +129,7 @@ export default {
   },
   mounted() {
     i18n.global.locale.value = useInfoStore().getAppLanguage
+    // console.log(setConfig.settings.baseURL)
   }
 };
 </script>

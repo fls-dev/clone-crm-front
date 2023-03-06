@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import axios from "axios";
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/users`;
 
@@ -10,6 +11,24 @@ export const useAuthStore = defineStore({
         returnUrl: null
     }),
     actions: {
+        // async refreshTokens () {
+        //     try {
+        //         const response = await axios.post(`${}/auth/refresh-tokens`, {},
+        //             { withCredentials: true })
+        //
+        //         _setAuthData({
+        //             accessToken: response.data.data.accessToken,
+        //             exp: _parseTokenData(response.data.data.accessToken).exp
+        //         })
+        //         return new ResponseWrapper(response, response.data.data)
+        //     } catch (error) {
+        //         console.log(error.response.data.code)
+        //         _resetAuthData()
+        //         $router.push({ name: 'login' }).catch(() => {})
+        //         throw new ErrorWrapper(error)
+        //     }
+        // }
+
     //     async login(username, password) {
     //         const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });
     //
@@ -27,5 +46,6 @@ export const useAuthStore = defineStore({
     //         localStorage.removeItem('user');
     //         router.push('/login');
     //     }
+
     }
 });

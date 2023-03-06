@@ -10,6 +10,9 @@ import {useInfoStore} from "@/stores/info.store";
 
 
 const router = createRouter({
+    scrollBehavior () {
+        return { x: 0, y: 0 }
+    },
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
