@@ -36,14 +36,13 @@
 </template>
 
 <script>
-import LogoBox from "@/components/static/LogoBox.vue";
 import LanguageSwitch from "@/components/static/LanguageSwitch.vue";
 import i18n from "@/locales/i18n";
 import {useInfoStore} from "@/stores/info.store";
 
 export default {
   name: "HeaderUser",
-  components: {LanguageSwitch, LogoBox},
+  components: {LanguageSwitch},
   data() {
     return {
     }

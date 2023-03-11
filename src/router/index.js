@@ -10,9 +10,6 @@ import {useInfoStore} from "@/stores/info.store";
 
 
 const router = createRouter({
-    scrollBehavior () {
-        return { x: 0, y: 0 }
-    },
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
@@ -23,6 +20,14 @@ const router = createRouter({
         {
             path: '/:pathMatch(.*)',
             component: () => import('@/views/NotFound.vue'),
+        },
+        {
+            path: '/403',
+            component: () => import('@/views/403error.vue'),
+            meta: {
+                requiresAuth: false,
+                title: "403"
+            },
         },
         {
             path: '/login',
@@ -45,7 +50,10 @@ const router = createRouter({
                     meta: {
                         iconPage:"fa-puzzle-piece",
                         requiresAuth: true,
-                        title: "dashboard"
+                        title: "dashboard",
+                        middleware:{
+                            role:"USER"
+                        }
                     },
                 },
                 {
@@ -90,7 +98,13 @@ const router = createRouter({
                 },
             ]
         }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        const layoutId = document.querySelector('.content');
+        if (layoutId) {
+            layoutId.scrollTop = 0;
+        }
+    }
 })
 
 router.beforeEach((to) => {

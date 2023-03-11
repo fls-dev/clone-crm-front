@@ -8,6 +8,7 @@ export const useAuthStore = defineStore({
     state: () => ({
         isLoggedIn: null,
         user: JSON.parse(localStorage.getItem('user')),
+        role: "USER",
         returnUrl: null
     }),
     actions: {

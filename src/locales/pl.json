@@ -8,7 +8,8 @@
     "dashboard": "Manager usług",
     "consultation": "Konsultacje online",
     "invoices": "FAKTUROWANIE ONLINE",
-    "company": "Moja firma"
+    "company": "Moja firma",
+    "403": "Access Denied"
   },
   "manager": {
     "btn_1": "Dowiedz się więcej",

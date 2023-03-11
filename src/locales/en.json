@@ -8,7 +8,8 @@
     "dashboard": "Services panel",
     "consultation": "Online consultations",
     "invoices": "INVOICE GENERATION ONLINE",
-    "company": "My company"
+    "company": "My company",
+    "403": "Access Denied"
   },
   "manager": {
     "btn_1": "Read more",

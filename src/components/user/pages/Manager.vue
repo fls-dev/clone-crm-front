@@ -92,7 +92,7 @@
         <div class="serv-body red">
           <p class="desc">
             <span>{{ $t('manager.box_7_str_1') }}</span>
-            <span>{{ $t('manager.box_7_str_2') }}</span>
+            <span @click="topScroll">{{ $t('manager.box_7_str_2') }}</span>
           </p>
           <router-link class="btn-serv red-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
         </div>
@@ -106,7 +106,11 @@
 
 <script>
 export default {
-  name: "Manager.vue"
+  name: "Manager.vue",
+  methods:{
+    topScroll(){
+    }
+  }
 }
 </script>
 

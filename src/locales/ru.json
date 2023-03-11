@@ -8,7 +8,8 @@
     "dashboard": "Менеджер услуг",
     "consultation": "Консультация онлайн",
     "invoices": "ГЕНЕРАЦИЯ ФАКТУРЫ ОНЛАЙН",
-    "company": "Моя компания"
+    "company": "Моя компания",
+    "403": "Access Denied"
   },
   "menuUser": {
     "manager": "Менеджер услуг",
