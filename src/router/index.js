@@ -51,9 +51,7 @@ const router = createRouter({
                         iconPage:"fa-puzzle-piece",
                         requiresAuth: true,
                         title: "dashboard",
-                        middleware:{
-                            role:"USER"
-                        }
+                        roles:["USER","ADMIN"]
                     },
                 },
                 {
@@ -63,7 +61,8 @@ const router = createRouter({
                     meta: {
                         iconPage:"fa-comments-question-check",
                         title: "consultation",
-                        requiresAuth: true
+                        requiresAuth: true,
+                        roles:["USER","ADMIN"]
                     },
                 },
                 {
@@ -107,10 +106,30 @@ const router = createRouter({
     }
 })
 
-router.beforeEach((to) => {
-    const auth = useAuthStore();
+router.beforeEach((to, from, next) => {
+    const authStore = useAuthStore();
+    const user = authStore.user;
+    console.log("to.name   :" +to.name)
+    console.log("useAuthStore().role   :" +useAuthStore().role)
+
     document.title = messages[useInfoStore().getAppLanguage].title_page[to.meta.title]
-    // if (to.meta.requiresAuth && to.name !== "Login") return '/login';
+    if (to.meta.requiresAuth && user ==null) {
+        // next();
+        next('/login');
+        console.log("login :   ")
+    }
+    else if (to.meta.roles) {
+        if (!to.meta.roles.includes(authStore.role)){
+            next('/403');
+        }else {
+            next();
+        }
+    }else if(to.name === "login" && user !==null && useAuthStore().role === "USER"){
+        router.push('/user');
+    }
+    else {
+        next();
+    }
 })
 
 export default router

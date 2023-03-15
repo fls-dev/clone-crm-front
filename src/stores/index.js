@@ -1,6 +1,8 @@
-import { createPinia, setActivePinia } from "pinia";
+import {createPinia, setActivePinia} from 'pinia'
 
-const pinia = createPinia();
+
+const pinia = createPinia()
+
 setActivePinia(pinia);
 export default pinia;
 export * from './auth.store';

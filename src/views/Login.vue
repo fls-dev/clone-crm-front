@@ -12,11 +12,11 @@
       <router-link class="link-white" to="/"><div class="logo"><span>C</span>LONE<span>CRM</span></div></router-link>
       <div v-if="isLogin">
         <p class="title">{{ $t("authorization.log_title") }}</p>
-        <form class="login-form">
+        <form @submit.prevent="actionLogin" class="login-form">
           <label>{{ $t('authorization.email') }}</label>
-          <input type="email" :value="login" :placeholder="$t('authorization.pl_email')" class="login">
+          <input type="text" v-model=login :placeholder="$t('authorization.pl_email')" class="login">
           <label>{{ $t('authorization.pass') }}</label>
-          <input type="password" :value="password" :placeholder="$t('authorization.pass')" class="password">
+          <input type="password" v-model=password :placeholder="$t('authorization.pass')" class="password">
           <button type="submit">{{ $t('authorization.btn_login') }}</button>
         </form>
       </div>
@@ -26,7 +26,7 @@
         <p class="sub-title">{{ $t('authorization.enter_email') }}</p>
         <form class="forgot-form">
           <label>{{ $t('authorization.pl_email') }}</label>
-          <input type="email" :value="login">
+          <input type="email" v-model=loginForgot>
           <div class="register-box-btn">
             <button class="btn-reg" type="submit">{{ $t('authorization.btn_ch') }}</button>
             <button class="btn-cancel" @click="goLogin" type="button">{{ $t('authorization.cancel')}}</button>
@@ -39,17 +39,17 @@
         <p class="sub-title">{{$t('authorization.reg_sub_title')}}</p>
         <form class="register-form">
           <label>{{$t('authorization.reg_last_name')}}<span>*</span></label>
-          <input type="text" :value="lastName">
+          <input type="text" v-model=lastName>
           <label>{{ $t('authorization.reg_name') }} <span>*</span></label>
-          <input type="text" :value="firstName">
+          <input type="text" v-model=firstName>
           <label>{{$t('authorization.email')}}<span>*</span></label>
-          <input type="text" :value="emailRegister">
+          <input type="text" v-model=emailRegister>
           <label>{{$t('authorization.pass')}} <span>*</span></label>
-          <input type="password" :value="passwordR">
+          <input type="password" v-model=passwordR>
           <label>{{$t('authorization.reg_rep_pass')}}<span>*</span></label>
-          <input type="password" :value="passwordR2">
+          <input type="password" v-model=passwordR2>
           <label>{{$t('authorization.reg_phone')}} <span>*</span></label>
-          <input type="text" :value="phone">
+          <input type="text" v-model=phone>
           <p class="little-text">Dokonując rejestracji, akceptujesz Regulamin crm.mcgroup.pl wraz z Polityką Prywatności
             i Cookies oraz zawierasz z MIA CONSULT GROUP Sp. z o.o. Umowę powierzenia przetwarzania danych osobowych.
           </p>
@@ -80,6 +80,7 @@
 import LanguageSwitch from "@/components/static/LanguageSwitch.vue";
 import i18n from "@/locales/i18n";
 import {useInfoStore} from "@/stores/info.store";
+import {useAuthStore} from "@/stores";
 // import {setConfig} from "../../set-config";
 
 export default {
@@ -87,8 +88,10 @@ export default {
   components: {LanguageSwitch},
   data() {
     return {
-      login: null,
+      login: '',
       password: '',
+      //
+      loginForgot: '',
       //
       lastName: null,
       firstName: null,
@@ -126,6 +129,10 @@ export default {
     setLang(event){
       useInfoStore().setAppLanguage(event.target.value,this.$route.meta.title)
     },
+    actionLogin(){
+      console.log(this.login, this.password)
+      useAuthStore().login(this.login, this.password)
+    }
   },
   mounted() {
     i18n.global.locale.value = useInfoStore().getAppLanguage

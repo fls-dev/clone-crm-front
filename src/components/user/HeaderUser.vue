@@ -21,8 +21,7 @@
       <div class="head-info">
         <div class="auth-name"><span>Klient:</span> Pavel Misko</div>
         <img class="user-avatar" src="@/assets/img/no-photo.svg">
-        <router-link class="link-white" to="/"><i class="fa-light fa-sign-out fa-2x" aria-hidden="true"></i>
-        </router-link>
+        <i @click="logOut" class="fa-light fa-sign-out fa-2x" aria-hidden="true"></i>
       </div>
     </div>
   </div>
@@ -39,6 +38,8 @@
 import LanguageSwitch from "@/components/static/LanguageSwitch.vue";
 import i18n from "@/locales/i18n";
 import {useInfoStore} from "@/stores/info.store";
+import {useAuthStore} from "@/stores";
+import router from "@/router";
 
 export default {
   name: "HeaderUser",
@@ -61,6 +62,12 @@ export default {
     },
     changeColor(){
       useInfoStore().setActiveColor(this.color)
+    },
+    logOut(){
+      useAuthStore().user = null;
+      useAuthStore().role = null;
+      useAuthStore().accessToken = null;
+      router.push('/login');
     }
   },
 

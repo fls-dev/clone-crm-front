@@ -105,11 +105,18 @@
 </template>
 
 <script>
+import {useAuthStore} from "@/stores";
+import {useInfoStore} from "@/stores/info.store";
+const auth = useAuthStore()
 export default {
   name: "Manager.vue",
   methods:{
     topScroll(){
     }
+  },
+  mounted() {
+    useAuthStore().getDataUser
+    // console.log(useAuthStore().accessToken)
   }
 }
 </script>
