@@ -1,10 +1,5 @@
 import {defineStore} from 'pinia';
 import {messages} from "@/locales/i18n";
-import router from "@/router";
-
-
-const baseUrl = `${import.meta.env.VITE_API_URL}/users`;
-
 export const useInfoStore = defineStore({
     id: 'info',
     state: () => ({

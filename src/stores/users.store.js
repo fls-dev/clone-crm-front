@@ -1,8 +1,4 @@
 import { defineStore } from 'pinia';
-import i18n from "@/locales/i18n";
-
-
-const baseUrl = `${import.meta.env.VITE_API_URL}/users`;
 
 export const useUsersStore = defineStore({
     id: 'users',

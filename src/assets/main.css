@@ -119,4 +119,34 @@ h1.title-page i{
     width: 100%;
     margin: 30px auto;
 }
-
+.company-name{ font-size: 1.2rem;color: var(--active-color)}
+.top-head i{color: var(--active-color)}
+.top-head{
+    background: #fff;
+    border-radius: 5px;
+    padding: 7px 20px;
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.top-head button, .section-input-bottom button{
+    padding: 10px 15px;
+    background: var(--btn-back-second);
+    color: #fff;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.top-head p{
+    font-size: 1rem;
+    color: #48465b;
+    margin: 0 35px 0 0;
+}
+@media screen and (max-width: 400px) {
+    .top-head h2{ margin: 0 0 15px 0; display: block;text-align: center; width: 100%}
+    .top-head{justify-content: center}
+}

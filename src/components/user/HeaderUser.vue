@@ -20,7 +20,9 @@
       <LanguageSwitch/>
       <div class="head-info">
         <div class="auth-name"><span>Klient:</span> Pavel Misko</div>
-        <img class="user-avatar" src="@/assets/img/no-photo.svg">
+        <router-link class="link-white" to="/user/profile">
+        <img class="user-avatar" src="@/assets/img/avatar.png">
+        </router-link>
         <i @click="logOut" class="fa-light fa-sign-out fa-2x" aria-hidden="true"></i>
       </div>
     </div>

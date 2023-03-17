@@ -2,6 +2,9 @@
   "main": {
     "name_company": "MIA CONSULT GROUP Sp. z o.o."
   },
+  "notifications": {
+    "update":"Изменения успешно сохранены!"
+  },
   "title_page" : {
     "default":"CRM",
     "login": "Авторизация",
@@ -9,6 +12,7 @@
     "consultation": "Консультация онлайн",
     "invoices": "ГЕНЕРАЦИЯ ФАКТУРЫ ОНЛАЙН",
     "company": "Моя компания",
+    "profile": "Профиль",
     "403": "Access Denied"
   },
   "menuUser": {
@@ -177,5 +181,13 @@
     "reg_rep_pass": "Повторите пароль",
     "reg_phone": "Телефон",
     "btn_reg": "Зарегистрироваться"
+  },
+  "profile": {
+    "pass": "Пароль",
+    "surname": "Фамилия",
+    "name": "Имя",
+    "position": "Должность",
+    "phone": "Личный телефон",
+    "add_phone": "Рабочий телефон"
   }
 }

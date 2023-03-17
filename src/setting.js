@@ -1,5 +1,5 @@
 
 export const settings = {
     homeUrl: "",
-    serverUrl: "http://localhost:3000/",
+    serverUrl: "http://localhost:3000",
 }

@@ -10,41 +10,49 @@
   <div class="body-content">
     <div class="section-input">
       <label>{{ $t('company.name_company') }}</label>
-      <input type="text" :value="name_company" :placeholder="$t('company.name_company')">
+      <input type="text" v-model=name_company :placeholder="$t('company.name_company')">
       <label>{{ $t('company.nip') }}</label>
-      <input type="text" :value="nip" :placeholder="$t('company.nip')">
+      <input type="text" v-model="nip" :placeholder="$t('company.nip')">
       <label>{{ $t('company.address') }}</label>
-      <input type="text" :value="address" :placeholder="$t('company.address')">
+      <input type="text" v-model="address" :placeholder="$t('company.address')">
 
       <div class="line-three-inp">
         <div>
           <label>{{ $t('company.index') }}</label>
-          <input type="text" :value="index" :placeholder="$t('company.index')">
+          <input type="text" v-model="index" :placeholder="$t('company.index')">
         </div>
         <div>
           <label>{{ $t('company.city') }}</label>
-          <input type="text" :value="city" :placeholder="$t('company.city')">
+          <input type="text" v-model="city" :placeholder="$t('company.city')">
         </div>
         <div>
           <label>{{ $t('company.country') }}</label>
-          <input type="text" :value="country" :placeholder="$t('company.country')">
+          <input type="text" v-model="country" :placeholder="$t('company.country')">
         </div>
       </div>
 
       <label>{{ $t('company.bank_details') }}</label>
-      <input type="text" :value="bank_details" :placeholder="$t('company.bank_details')">
+      <input type="text" v-model="bank_details" :placeholder="$t('company.bank_details')">
       <label>{{ $t('company.bank_name') }}</label>
-      <input type="text" :value="bank_name" :placeholder="$t('company.bank_name')">
+      <input type="text" v-model="bank_name" :placeholder="$t('company.bank_name')">
       <label>{{ $t('company.swift') }}</label>
-      <input type="text" :value="swift" :placeholder="$t('company.swift')">
+      <input type="text" v-model="swift" :placeholder="$t('company.swift')">
     </div>
     <div class="section-input-bottom">
-      <button>{{$t('company.btn')}}</button>
+      <button @click="update">{{$t('company.btn')}}</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import {settings} from "@/setting";
+import {useAuthStore} from "@/stores";
+import {createToaster} from "@meforma/vue-toaster";
+
+const toaster = createToaster();
+const user = useAuthStore().getDataUser
+
 export default {
   name: "MyCompany",
   data() {
@@ -58,8 +66,75 @@ export default {
       bank_details: "",
       bank_name: "",
       swift: "",
-      company_is_auth: ""
+      company_is_auth: "",
     }
+  },
+  methods:{
+    getInfo(){
+      axios.get(`${settings.serverUrl}/company/get/${useAuthStore().userId}`).then(res => {
+        if (res.status === 200 && res.data.status === true) {
+          this.nip = res.data.company.nip
+          const info = JSON.parse(res.data.company.info);
+          this.name_company = info.name_company
+          this.address = info.address
+          this.index = info.index
+          this.city = info.city
+          this.country = info.country
+          this.bank_details = info.bank_details
+          this.bank_name = info.bank_name
+          this.swift = info.swift
+        }else{
+         console.log("else")
+         console.info(res)
+        }
+      }).catch(function (e) {
+        if(e.response.status === 401){
+          console.info('handler 401!!')
+          useAuthStore().refreshTokens()
+        }
+        console.log(e)
+      })
+    },
+   async update(){
+      await axios.post(`${settings.serverUrl}/company/create`, {
+        userId: user.id,
+        nip: this.nip,
+        info: JSON.stringify({
+          name_company: this.name_company,
+          nip: this.nip,
+          address: this.address,
+          index: this.index,
+          city: this.city,
+          country: this.country,
+          bank_details: this.bank_details,
+          bank_name: this.bank_name,
+          swift: this.swift,
+        })
+      }).then(res => {
+        console.log(res)
+        if (res.status === 200 && res.data.status === true) {
+          useAuthStore().user = res.data.user
+          toaster.success( this.$t('notifications.update'),{
+            position: "top",
+            duration: 3000
+          });
+        }else{
+          toaster.error("error update",{
+            position: "top",
+            duration: 3000
+          });
+        }
+      }).catch(function (error) {
+        console.log(error)
+        toaster.error("error created",{
+          position: "top",
+          duration: 3000
+        });
+      })
+    }
+  },
+  mounted() {
+   this.getInfo()
   }
 }
 </script>

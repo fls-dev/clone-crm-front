@@ -23,6 +23,7 @@ const router = createRouter({
         },
         {
             path: '/403',
+            name: "403",
             component: () => import('@/views/403error.vue'),
             meta: {
                 requiresAuth: false,
@@ -51,6 +52,17 @@ const router = createRouter({
                         iconPage:"fa-puzzle-piece",
                         requiresAuth: true,
                         title: "dashboard",
+                        roles:["USER","ADMIN"]
+                    },
+                },
+                {
+                    path: 'profile',
+                    name: 'profile',
+                    component: () => import('@/components/user/pages/User-profile.vue'),
+                    meta: {
+                        iconPage:"fa-light fa-id-card-clip",
+                        title: "profile",
+                        requiresAuth: true,
                         roles:["USER","ADMIN"]
                     },
                 },

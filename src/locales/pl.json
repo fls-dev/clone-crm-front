@@ -2,6 +2,9 @@
   "main": {
     "name_company": "MIA CONSULT GROUP Sp. z o.o."
   },
+  "notifications": {
+    "update":"Zmiany zostały pomyślnie zapisane!"
+  },
   "title_page" : {
     "default":"CRM",
     "login": "Logowanie",
@@ -9,6 +12,7 @@
     "consultation": "Konsultacje online",
     "invoices": "FAKTUROWANIE ONLINE",
     "company": "Moja firma",
+    "profile": "Profil",
     "403": "Access Denied"
   },
   "manager": {
@@ -176,5 +180,13 @@
     "reg_rep_pass": "Powtórz hasło",
     "reg_phone": "Telefon",
     "btn_reg": "Zarejestrować"
+  },
+  "profile": {
+    "pass": "Hasło",
+    "surname": "Nazwisko",
+    "name": "Imię",
+    "position": "Stanowisko",
+    "phone": "Telefon osobisty",
+    "add_phone": "Telefon służbowy"
   }
 }
