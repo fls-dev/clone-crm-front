@@ -164,25 +164,25 @@
     "service_cost": "Service cost"
   },
   "authorization": {
-    "log_title": "Authorization",
-    "btn_login": "Login",
+    "log_title": "Log in",
+    "btn_login": "Log in",
     "forgot": "Forgot your password?",
     "email": "E-mail",
     "pl_email": "E-mail or Login",
     "pass": "Password",
     "no_acc": "Don't have an account yet? ",
-    "no_acc_2": "Registration",
+    "no_acc_2": "Sign up",
     "p_change": "Password change",
     "enter_email": "Enter your E-mail or Login to update your password:",
     "btn_ch": "Change password",
     "cancel": "Cancel",
-    "reg_title": "Registration",
-    "reg_sub_title": "Please register to connect to the service",
+    "reg_title": "Sign up",
+    "reg_sub_title": "Please sign up to connect to the service",
     "reg_last_name": "Surname",
     "reg_name": "Name",
     "reg_rep_pass": "Repeat password",
     "reg_phone": "Phone",
-    "btn_reg": "Register"
+    "btn_reg": "Sign up"
   },
   "profile": {
     "pass": "Password",

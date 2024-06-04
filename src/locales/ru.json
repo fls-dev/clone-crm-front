@@ -162,7 +162,7 @@
     "service_cost": "Стоимость услуг"
   },
   "authorization": {
-    "log_title": "Авторизация",
+    "log_title": "Войдите в систему",
     "btn_login": "Войти",
     "forgot": "Забыли пароль?",
     "email": "E-mail",

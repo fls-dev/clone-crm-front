@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="enable" data-theme="default" data-theme-colors="default" data-bs-theme="light" data-layout-width="fluid" data-layout-position="fixed" data-layout-style="default" data-body-image="none" data-sidebar-visibility="show">
+<!--<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">-->
   <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="/fontawesome-pro/css/all.min.css">
+      <!-- Favicon -->
+
+      <link rel="shortcut icon" type="image/png" href="/assets/images/brand-logos/favicon.ico">
+      <!-- Authentication-main Js -->
+      <script src="/assets/js/authentication-main.js"></script>
+
+      <!-- Bootstrap Css -->
+      <link id="style" href="/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+
+      <!-- Style Css -->
+      <link href="/assets/css/styles.min.css" rel="stylesheet" >
+
+      <!-- Icons Css -->
+      <link href="/assets/css/icons.css" rel="stylesheet" >
     <title>CLONE CRM</title>
   </head>
-  <body>
-    <div id="app"></div>
+  <body data-theme-version="light">
+<!--    <div id="app"></div>-->
+    <div id="layout-wrapper"></div>
     <script type="module" src="/src/main.js"></script>
+<!-- Bootstrap JS -->
+    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- password-addon init -->
+    <script src="/assets/js/pages/password-addon.init.js"></script>
   </body>
 </html>
+

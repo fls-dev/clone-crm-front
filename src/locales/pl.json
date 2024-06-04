@@ -7,7 +7,7 @@
   },
   "title_page" : {
     "default":"CRM",
-    "login": "Logowanie",
+    "login": "Zaloguj się",
     "dashboard": "Manager usług",
     "consultation": "Konsultacje online",
     "invoices": "FAKTUROWANIE ONLINE",
@@ -161,25 +161,25 @@
     "service_cost": "Koszt usług"
   },
   "authorization": {
-    "log_title": "Logowanie",
-    "btn_login": "Zaloguj się",
+    "log_title": "Zaloguj się",
+    "btn_login": "Zaloguj",
     "forgot": "Nie pamiętasz hasła?",
     "email": "E-mail",
     "pl_email": "E-mail lub Login",
     "pass": "Hasło",
     "no_acc": "Nie masz jeszcze konta? ",
-    "no_acc_2": "Rejestracja",
+    "no_acc_2": "Załóż konto",
     "p_change": "Zmiana hasła",
     "enter_email": "Wpisz swój adres E-mail, aby zmienić hasło:",
     "btn_ch": "Zmienić hasło",
     "cancel": "Anuluj",
-    "reg_title": "Rejestracja",
+    "reg_title": "Załóż konto",
     "reg_sub_title": "Zarejestruj się, aby połączyć się z serwisem",
     "reg_last_name": "Nazwisko",
     "reg_name": "Imię",
     "reg_rep_pass": "Powtórz hasło",
     "reg_phone": "Telefon",
-    "btn_reg": "Zarejestrować"
+    "btn_reg": "Załóż konto"
   },
   "profile": {
     "pass": "Hasło",

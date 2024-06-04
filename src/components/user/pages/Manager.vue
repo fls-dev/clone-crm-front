@@ -1,107 +1,131 @@
 <template>
-  <div class="page-head">
-    <h1 class="title-page"><i class="fa-light" :class=this.$route.meta.iconPage></i> {{$t("title_page.dashboard")}}</h1>
-  </div>
-  <div class="body-content">
-    <div class="services">
-      <div class="box-service back-mia">
-       <div class="serv-head green-head">
-         <p>{{ $t('manager.box_1_title') }}</p>
-       </div>
-        <div class="serv-body green">
-          <p class="desc">
-            <span>{{ $t('manager.box_1_str_1') }}</span>
-            <span class="b-span">{{ $t('manager.box_1_str_2') }}</span>
-            <span>{{ $t('manager.box_1_str_3') }}</span>
-          </p>
-          <router-link class="btn-serv green-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_1')}}</router-link>
-        </div>
-      </div>
-    </div>
-    <div class="line100"></div>
-    <div class="services-three line-1">
-      <div class="box-service back-fak">
-        <div class="serv-head orange-head">
-          <p>{{ $t('manager.box_2_title') }}</p>
-        </div>
-        <div class="serv-body orange">
-          <p class="desc">
-            <span>{{ $t('manager.box_2_str_1') }}</span>
-            <span>{{ $t('manager.box_2_str_2') }}</span>
-          </p>
-          <router-link class="btn-serv orange-btn" :to="{ name: 'invoices'}">{{ $t('manager.btn_2')}}</router-link>
-        </div>
-      </div>
+  <div class="page-content">
+    <div class="container-fluid">
 
-      <div class="box-service back-cons">
-        <div class="serv-head blue-head">
-          <p>{{ $t('manager.box_3_title') }}</p>
-        </div>
-        <div class="serv-body blue">
-          <p class="desc">
-            <span>{{ $t('manager.box_3_str_1') }}</span>
-            <span>{{ $t('manager.box_3_str_2') }}</span>
-          </p>
-          <router-link class="btn-serv blue-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
-        </div>
-      </div>
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+            <h4 class="mb-sm-0">Starter</h4>
 
-      <div class="box-service back-acc">
-        <div class="serv-head purple-head">
-          <p>{{ $t('manager.box_4_title') }}</p>
-        </div>
-        <div class="serv-body purple">
-          <p class="desc">
-            <span>{{ $t('manager.box_4_str_1') }}</span>
-            <span>{{ $t('manager.box_4_str_2') }}</span>
-          </p>
-          <router-link class="btn-serv purple-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
-        </div>
-      </div>
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                <li class="breadcrumb-item active">Starter</li>
+              </ol>
+            </div>
 
-      <div class="box-service back-docs">
-        <div class="serv-head briz-head">
-          <p>{{ $t('manager.box_5_title') }}</p>
-        </div>
-        <div class="serv-body briz">
-          <p class="desc">
-            <span>{{ $t('manager.box_5_str_1') }}</span>
-            <span class="b-span">{{ $t('manager.box_5_str_2') }}</span>
-          </p>
-          <router-link class="btn-serv briz-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_1')}}</router-link>
+          </div>
         </div>
       </div>
-
-      <div class="box-service mia-start">
-        <div class="serv-head laguna-head">
-          <p>{{ $t('manager.box_6_title') }}</p>
-        </div>
-        <div class="serv-body laguna">
-          <p class="desc">
-            <span>{{ $t('manager.box_6_str_1') }}</span>
-            <span>{{ $t('manager.box_6_str_2') }}</span>
-          </p>
-          <router-link class="btn-serv laguna-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
-        </div>
-      </div>
-
-      <div class="box-service back-sant">
-        <div class="serv-head red-head">
-          <p>{{ $t('manager.box_7_title') }}</p>
-        </div>
-        <div class="serv-body red">
-          <p class="desc">
-            <span>{{ $t('manager.box_7_str_1') }}</span>
-            <span @click="topScroll">{{ $t('manager.box_7_str_2') }}</span>
-          </p>
-          <router-link class="btn-serv red-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>
-        </div>
-      </div>
+      <!-- end page title -->
 
     </div>
-
-
+    <!-- container-fluid -->
   </div>
+<!--  <div class="page-head">-->
+<!--    <h1 class="title-page"><i class="fa-light" :class=this.$route.meta.iconPage></i> {{$t("title_page.dashboard")}}</h1>-->
+<!--  </div>-->
+<!--  <div class="body-content">-->
+<!--    <div class="services">-->
+<!--      <div class="box-service back-mia">-->
+<!--       <div class="serv-head green-head">-->
+<!--         <p>{{ $t('manager.box_1_title') }}</p>-->
+<!--       </div>-->
+<!--        <div class="serv-body green">-->
+<!--          <p class="desc">-->
+<!--            <span>{{ $t('manager.box_1_str_1') }}</span>-->
+<!--            <span class="b-span">{{ $t('manager.box_1_str_2') }}</span>-->
+<!--            <span>{{ $t('manager.box_1_str_3') }}</span>-->
+<!--          </p>-->
+<!--          <router-link class="btn-serv green-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_1')}}</router-link>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="line100"></div>-->
+<!--    <div class="services-three line-1">-->
+<!--      <div class="box-service back-fak">-->
+<!--        <div class="serv-head orange-head">-->
+<!--          <p>{{ $t('manager.box_2_title') }}</p>-->
+<!--        </div>-->
+<!--        <div class="serv-body orange">-->
+<!--          <p class="desc">-->
+<!--            <span>{{ $t('manager.box_2_str_1') }}</span>-->
+<!--            <span>{{ $t('manager.box_2_str_2') }}</span>-->
+<!--          </p>-->
+<!--          <router-link class="btn-serv orange-btn" :to="{ name: 'invoices'}">{{ $t('manager.btn_2')}}</router-link>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="box-service back-cons">-->
+<!--        <div class="serv-head blue-head">-->
+<!--          <p>{{ $t('manager.box_3_title') }}</p>-->
+<!--        </div>-->
+<!--        <div class="serv-body blue">-->
+<!--          <p class="desc">-->
+<!--            <span>{{ $t('manager.box_3_str_1') }}</span>-->
+<!--            <span>{{ $t('manager.box_3_str_2') }}</span>-->
+<!--          </p>-->
+<!--          <router-link class="btn-serv blue-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="box-service back-acc">-->
+<!--        <div class="serv-head purple-head">-->
+<!--          <p>{{ $t('manager.box_4_title') }}</p>-->
+<!--        </div>-->
+<!--        <div class="serv-body purple">-->
+<!--          <p class="desc">-->
+<!--            <span>{{ $t('manager.box_4_str_1') }}</span>-->
+<!--            <span>{{ $t('manager.box_4_str_2') }}</span>-->
+<!--          </p>-->
+<!--          <router-link class="btn-serv purple-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="box-service back-docs">-->
+<!--        <div class="serv-head briz-head">-->
+<!--          <p>{{ $t('manager.box_5_title') }}</p>-->
+<!--        </div>-->
+<!--        <div class="serv-body briz">-->
+<!--          <p class="desc">-->
+<!--            <span>{{ $t('manager.box_5_str_1') }}</span>-->
+<!--            <span class="b-span">{{ $t('manager.box_5_str_2') }}</span>-->
+<!--          </p>-->
+<!--          <router-link class="btn-serv briz-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_1')}}</router-link>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="box-service mia-start">-->
+<!--        <div class="serv-head laguna-head">-->
+<!--          <p>{{ $t('manager.box_6_title') }}</p>-->
+<!--        </div>-->
+<!--        <div class="serv-body laguna">-->
+<!--          <p class="desc">-->
+<!--            <span>{{ $t('manager.box_6_str_1') }}</span>-->
+<!--            <span>{{ $t('manager.box_6_str_2') }}</span>-->
+<!--          </p>-->
+<!--          <router-link class="btn-serv laguna-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="box-service back-sant">-->
+<!--        <div class="serv-head red-head">-->
+<!--          <p>{{ $t('manager.box_7_title') }}</p>-->
+<!--        </div>-->
+<!--        <div class="serv-body red">-->
+<!--          <p class="desc">-->
+<!--            <span>{{ $t('manager.box_7_str_1') }}</span>-->
+<!--            <span @click="topScroll">{{ $t('manager.box_7_str_2') }}</span>-->
+<!--          </p>-->
+<!--          <router-link class="btn-serv red-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+
+<!--  </div>-->
 </template>
 
 <script>
