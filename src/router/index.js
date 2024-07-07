@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import Login from "@/views/Login.vue";
+import Login from "@/views/auth/Login.vue";
 import LayoutAdmin from "@/views/UserLayout.vue";
 
 
@@ -7,6 +7,7 @@ import LayoutAdmin from "@/views/UserLayout.vue";
 import {useAuthStore} from "@/stores";
 import {messages} from "@/locales/i18n";
 import {useInfoStore} from "@/stores/info.store";
+import Signup from "@/views/auth/Signup.vue";
 
 
 const router = createRouter({
@@ -37,6 +38,15 @@ const router = createRouter({
             meta: {
                 requiresAuth: false,
                 title: "login"
+            },
+        },
+        {
+            path: '/signup',
+            name: 'signup',
+            component: Signup,
+            meta: {
+                requiresAuth: false,
+                title: "signup"
             },
         },
         {

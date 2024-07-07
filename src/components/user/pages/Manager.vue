@@ -1,142 +1,121 @@
 <template>
-  <div class="page-content">
-    <div class="container-fluid">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <!-- Invoice List Widget -->
 
-      <!-- start page title -->
-      <div class="row">
-        <div class="col-12">
-          <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-            <h4 class="mb-sm-0">Starter</h4>
-
-            <div class="page-title-right">
-              <ol class="breadcrumb m-0">
-                <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
-                <li class="breadcrumb-item active">Starter</li>
-              </ol>
+    <div class="card mb-6">
+      <div class="card-widget-separator-wrapper">
+        <div class="card-body card-widget-separator">
+          <div class="row gy-4 gy-sm-1">
+            <div class="col-sm-6 col-lg-3">
+              <div
+                  class="d-flex justify-content-between align-items-start card-widget-1 border-end pb-4 pb-sm-0">
+                <div>
+                  <h4 class="mb-0">24</h4>
+                  <p class="mb-0">Clients</p>
+                </div>
+                <div class="avatar me-sm-6">
+                            <span class="avatar-initial rounded-3">
+                              <i class="ri-user-line text-heading ri-26px"></i>
+                            </span>
+                </div>
+              </div>
+              <hr class="d-none d-sm-block d-lg-none me-6" />
             </div>
-
+            <div class="col-sm-6 col-lg-3">
+              <div
+                  class="d-flex justify-content-between align-items-start card-widget-2 border-end pb-4 pb-sm-0">
+                <div>
+                  <h4 class="mb-0">165</h4>
+                  <p class="mb-0">Invoices</p>
+                </div>
+                <div class="avatar me-lg-6">
+                            <span class="avatar-initial rounded-3">
+                              <i class="ri-pages-line text-heading ri-26px"></i>
+                            </span>
+                </div>
+              </div>
+              <hr class="d-none d-sm-block d-lg-none" />
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div
+                  class="d-flex justify-content-between align-items-start border-end pb-4 pb-sm-0 card-widget-3">
+                <div>
+                  <h4 class="mb-0">$2.46k</h4>
+                  <p class="mb-0">Paid</p>
+                </div>
+                <div class="avatar me-sm-6">
+                            <span class="avatar-initial rounded-3">
+                              <i class="ri-wallet-line text-heading ri-26px"></i>
+                            </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h4 class="mb-0">$876</h4>
+                  <p class="mb-0">Unpaid</p>
+                </div>
+                <div class="avatar">
+                            <span class="avatar-initial rounded-3">
+                              <i class="ri-money-dollar-circle-line text-heading ri-26px"></i>
+                            </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- end page title -->
-
     </div>
-    <!-- container-fluid -->
+
+    <!-- Invoice List Table -->
+    <div class="card">
+      <div class="card-datatable table-responsive">
+        <table class="invoice-list-table table">
+          <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>#ID</th>
+            <th>#</th>
+            <th>Client</th>
+            <th>Total</th>
+            <th class="text-truncate">Issued Date</th>
+            <th>Balance</th>
+            <th>Invoice Status</th>
+            <th class="cell-fit">Actions</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+
   </div>
-<!--  <div class="page-head">-->
-<!--    <h1 class="title-page"><i class="fa-light" :class=this.$route.meta.iconPage></i> {{$t("title_page.dashboard")}}</h1>-->
-<!--  </div>-->
-<!--  <div class="body-content">-->
-<!--    <div class="services">-->
-<!--      <div class="box-service back-mia">-->
-<!--       <div class="serv-head green-head">-->
-<!--         <p>{{ $t('manager.box_1_title') }}</p>-->
-<!--       </div>-->
-<!--        <div class="serv-body green">-->
-<!--          <p class="desc">-->
-<!--            <span>{{ $t('manager.box_1_str_1') }}</span>-->
-<!--            <span class="b-span">{{ $t('manager.box_1_str_2') }}</span>-->
-<!--            <span>{{ $t('manager.box_1_str_3') }}</span>-->
-<!--          </p>-->
-<!--          <router-link class="btn-serv green-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_1')}}</router-link>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="line100"></div>-->
-<!--    <div class="services-three line-1">-->
-<!--      <div class="box-service back-fak">-->
-<!--        <div class="serv-head orange-head">-->
-<!--          <p>{{ $t('manager.box_2_title') }}</p>-->
-<!--        </div>-->
-<!--        <div class="serv-body orange">-->
-<!--          <p class="desc">-->
-<!--            <span>{{ $t('manager.box_2_str_1') }}</span>-->
-<!--            <span>{{ $t('manager.box_2_str_2') }}</span>-->
-<!--          </p>-->
-<!--          <router-link class="btn-serv orange-btn" :to="{ name: 'invoices'}">{{ $t('manager.btn_2')}}</router-link>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="box-service back-cons">-->
-<!--        <div class="serv-head blue-head">-->
-<!--          <p>{{ $t('manager.box_3_title') }}</p>-->
-<!--        </div>-->
-<!--        <div class="serv-body blue">-->
-<!--          <p class="desc">-->
-<!--            <span>{{ $t('manager.box_3_str_1') }}</span>-->
-<!--            <span>{{ $t('manager.box_3_str_2') }}</span>-->
-<!--          </p>-->
-<!--          <router-link class="btn-serv blue-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="box-service back-acc">-->
-<!--        <div class="serv-head purple-head">-->
-<!--          <p>{{ $t('manager.box_4_title') }}</p>-->
-<!--        </div>-->
-<!--        <div class="serv-body purple">-->
-<!--          <p class="desc">-->
-<!--            <span>{{ $t('manager.box_4_str_1') }}</span>-->
-<!--            <span>{{ $t('manager.box_4_str_2') }}</span>-->
-<!--          </p>-->
-<!--          <router-link class="btn-serv purple-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="box-service back-docs">-->
-<!--        <div class="serv-head briz-head">-->
-<!--          <p>{{ $t('manager.box_5_title') }}</p>-->
-<!--        </div>-->
-<!--        <div class="serv-body briz">-->
-<!--          <p class="desc">-->
-<!--            <span>{{ $t('manager.box_5_str_1') }}</span>-->
-<!--            <span class="b-span">{{ $t('manager.box_5_str_2') }}</span>-->
-<!--          </p>-->
-<!--          <router-link class="btn-serv briz-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_1')}}</router-link>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="box-service mia-start">-->
-<!--        <div class="serv-head laguna-head">-->
-<!--          <p>{{ $t('manager.box_6_title') }}</p>-->
-<!--        </div>-->
-<!--        <div class="serv-body laguna">-->
-<!--          <p class="desc">-->
-<!--            <span>{{ $t('manager.box_6_str_1') }}</span>-->
-<!--            <span>{{ $t('manager.box_6_str_2') }}</span>-->
-<!--          </p>-->
-<!--          <router-link class="btn-serv laguna-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="box-service back-sant">-->
-<!--        <div class="serv-head red-head">-->
-<!--          <p>{{ $t('manager.box_7_title') }}</p>-->
-<!--        </div>-->
-<!--        <div class="serv-body red">-->
-<!--          <p class="desc">-->
-<!--            <span>{{ $t('manager.box_7_str_1') }}</span>-->
-<!--            <span @click="topScroll">{{ $t('manager.box_7_str_2') }}</span>-->
-<!--          </p>-->
-<!--          <router-link class="btn-serv red-btn" :to="{ name: 'consultation'}">{{ $t('manager.btn_2')}}</router-link>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--    </div>-->
-
-
-<!--  </div>-->
 </template>
 
 <script>
 import {useAuthStore} from "@/stores";
 import {useInfoStore} from "@/stores/info.store";
+import {onMounted, onUnmounted} from "vue";
 const auth = useAuthStore()
 export default {
   name: "Manager.vue",
   methods:{
     topScroll(){
     }
+  },
+  setup() {
+    let originalClass = '';
+
+    onMounted(() => {
+      originalClass = document.documentElement.className;
+      document.documentElement.className = 'light-style layout-navbar-fixed layout-menu-fixed layout-compact';
+    });
+
+    onUnmounted(() => {
+      document.documentElement.className = originalClass;
+    });
   },
   mounted() {
     useAuthStore().getDataUser

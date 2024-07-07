@@ -1,246 +1,698 @@
+/**
+ * Main
+ */
+
+'use strict';
+
+window.isRtl = window.Helpers.isRtl();
+window.isDarkStyle = window.Helpers.isDarkStyle();
+let menu,
+  animate,
+  isHorizontalLayout = false;
+
+if (document.getElementById('layout-menu')) {
+  isHorizontalLayout = document.getElementById('layout-menu').classList.contains('menu-horizontal');
+}
+
 (function () {
-    'use strict';
+  // Button & Pagination Waves effect
+  if (typeof Waves !== 'undefined') {
+    Waves.init();
+    Waves.attach(
+      ".btn[class*='btn-']:not(.position-relative):not([class*='btn-outline-']):not([class*='btn-label-'])",
+      ['waves-light']
+    );
+    Waves.attach("[class*='btn-outline-']:not(.position-relative)");
+    Waves.attach("[class*='btn-label-']:not(.position-relative)");
+    Waves.attach('.pagination .page-item .page-link');
+    Waves.attach('.dropdown-menu .dropdown-item');
+    Waves.attach('.light-style .list-group .list-group-item-action');
+    Waves.attach('.dark-style .list-group .list-group-item-action', ['waves-light']);
+    Waves.attach('.nav-tabs:not(.nav-tabs-widget) .nav-item .nav-link');
+    Waves.attach('.nav-pills .nav-item .nav-link', ['waves-light']);
+    Waves.attach('.menu-vertical .menu-item .menu-link.menu-toggle');
+  }
 
-    if (localStorage.getItem("spruhadarktheme")) {
-        document.querySelector("html").setAttribute("data-theme-mode", "dark")
-        document.querySelector("html").setAttribute("data-menu-styles", "dark")
-        document.querySelector("html").setAttribute("data-header-styles", "dark")
+  // Window scroll function for navbar
+  function onScroll() {
+    var layoutPage = document.querySelector('.layout-page');
+    if (layoutPage) {
+      if (window.pageYOffset > 0) {
+        layoutPage.classList.add('window-scrolled');
+      } else {
+        layoutPage.classList.remove('window-scrolled');
+      }
     }
-    if (localStorage.spruhartl) {
-        let html = document.querySelector('html');
-        html.setAttribute("dir", "rtl");
-        document.querySelector("#style")?.setAttribute("href", "../assets/libs/bootstrap/css/bootstrap.rtl.min.css");
+  }
+  // On load time out
+  setTimeout(() => {
+    onScroll();
+  }, 200);
+
+  // On window scroll
+  window.onscroll = function () {
+    onScroll();
+  };
+
+  setTimeout(function () {
+    window.Helpers.initCustomOptionCheck();
+  }, 1000);
+
+  // Initialize menu
+  //-----------------
+
+  let layoutMenuEl = document.querySelectorAll('#layout-menu');
+  layoutMenuEl.forEach(function (element) {
+    menu = new Menu(element, {
+      orientation: isHorizontalLayout ? 'horizontal' : 'vertical',
+      closeChildren: isHorizontalLayout ? true : false,
+      // ? This option only works with Horizontal menu
+      showDropdownOnHover: localStorage.getItem('templateCustomizer-' + templateName + '--ShowDropdownOnHover') // If value(showDropdownOnHover) is set in local storage
+        ? localStorage.getItem('templateCustomizer-' + templateName + '--ShowDropdownOnHover') === 'true' // Use the local storage value
+        : window.templateCustomizer !== undefined // If value is set in config.js
+          ? window.templateCustomizer.settings.defaultShowDropdownOnHover // Use the config.js value
+          : true // Use this if you are not using the config.js and want to set value directly from here
+    });
+    // Change parameter to true if you want scroll animation
+    window.Helpers.scrollToActive((animate = false));
+    window.Helpers.mainMenu = menu;
+  });
+
+  // Initialize menu togglers and bind click on each
+  let menuToggler = document.querySelectorAll('.layout-menu-toggle');
+  menuToggler.forEach(item => {
+    item.addEventListener('click', event => {
+      event.preventDefault();
+      window.Helpers.toggleCollapsed();
+      // Enable menu state with local storage support if enableMenuLocalStorage = true from config.js
+      if (config.enableMenuLocalStorage && !window.Helpers.isSmallScreen()) {
+        try {
+          localStorage.setItem(
+            'templateCustomizer-' + templateName + '--LayoutCollapsed',
+            String(window.Helpers.isCollapsed())
+          );
+          // Update customizer checkbox state on click of menu toggler
+          let layoutCollapsedCustomizerOptions = document.querySelector('.template-customizer-layouts-options');
+          if (layoutCollapsedCustomizerOptions) {
+            let layoutCollapsedVal = window.Helpers.isCollapsed() ? 'collapsed' : 'expanded';
+            layoutCollapsedCustomizerOptions.querySelector(`input[value="${layoutCollapsedVal}"]`).click();
+          }
+        } catch (e) {}
+      }
+    });
+  });
+
+  // Menu swipe gesture
+
+  // Detect swipe gesture on the target element and call swipe In
+  window.Helpers.swipeIn('.drag-target', function (e) {
+    window.Helpers.setCollapsed(false);
+  });
+
+  // Detect swipe gesture on the target element and call swipe Out
+  window.Helpers.swipeOut('#layout-menu', function (e) {
+    if (window.Helpers.isSmallScreen()) window.Helpers.setCollapsed(true);
+  });
+
+  // Display in main menu when menu scrolls
+  let menuInnerContainer = document.getElementsByClassName('menu-inner'),
+    menuInnerShadow = document.getElementsByClassName('menu-inner-shadow')[0];
+  if (menuInnerContainer.length > 0 && menuInnerShadow) {
+    menuInnerContainer[0].addEventListener('ps-scroll-y', function () {
+      if (this.querySelector('.ps__thumb-y').offsetTop) {
+        menuInnerShadow.style.display = 'block';
+      } else {
+        menuInnerShadow.style.display = 'none';
+      }
+    });
+  }
+
+  // Update light/dark image based on current style
+  function switchImage(style) {
+    if (style === 'system') {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        style = 'dark';
+      } else {
+        style = 'light';
+      }
     }
-    if (localStorage.getItem("spruhalayout") == "horizontal") {
-        document.querySelector("html").setAttribute("data-nav-layout", "horizontal")
+    const switchImagesList = [].slice.call(document.querySelectorAll('[data-app-' + style + '-img]'));
+    switchImagesList.map(function (imageEl) {
+      const setImage = imageEl.getAttribute('data-app-' + style + '-img');
+      imageEl.src = assetsPath + 'img/' + setImage; // Using window.assetsPath to get the exact relative path
+    });
+  }
+
+  //Style Switcher (Light/Dark/System Mode)
+  let styleSwitcher = document.querySelector('.dropdown-style-switcher');
+
+  // Active class on style switcher dropdown items
+  const activeStyle = document.documentElement.getAttribute('data-style');
+
+  // Get style from local storage or use 'system' as default
+  let storedStyle =
+    localStorage.getItem('templateCustomizer-' + templateName + '--Style') || //if no template style then use Customizer style
+    (window.templateCustomizer?.settings?.defaultStyle ?? 'light'); //!if there is no Customizer then use default style as light
+
+  // Set style on click of style switcher item if template customizer is enabled
+  if (window.templateCustomizer && styleSwitcher) {
+    let styleSwitcherItems = [].slice.call(styleSwitcher.children[1].querySelectorAll('.dropdown-item'));
+    styleSwitcherItems.forEach(function (item) {
+      item.classList.remove('active');
+      item.addEventListener('click', function () {
+        let currentStyle = this.getAttribute('data-theme');
+        if (currentStyle === 'light') {
+          window.templateCustomizer.setStyle('light');
+        } else if (currentStyle === 'dark') {
+          window.templateCustomizer.setStyle('dark');
+        } else {
+          window.templateCustomizer.setStyle('system');
+        }
+      });
+
+      if (item.getAttribute('data-theme') === activeStyle) {
+        // Add 'active' class to the item if it matches the activeStyle
+        item.classList.add('active');
+      }
+    });
+
+    // Update style switcher icon based on the stored style
+
+    const styleSwitcherIcon = styleSwitcher.querySelector('i');
+
+    if (storedStyle === 'light') {
+      styleSwitcherIcon.classList.add('ri-sun-line');
+      new bootstrap.Tooltip(styleSwitcherIcon, {
+        title: 'Light Mode',
+        fallbackPlacements: ['bottom']
+      });
+    } else if (storedStyle === 'dark') {
+      styleSwitcherIcon.classList.add('ri-moon-clear-line');
+      new bootstrap.Tooltip(styleSwitcherIcon, {
+        title: 'Dark Mode',
+        fallbackPlacements: ['bottom']
+      });
+    } else {
+      styleSwitcherIcon.classList.add('ri-computer-line');
+      new bootstrap.Tooltip(styleSwitcherIcon, {
+        title: 'System Mode',
+        fallbackPlacements: ['bottom']
+      });
+    }
+  }
+  // Run switchImage function based on the stored style
+  switchImage(storedStyle);
+
+  // Internationalization (Language Dropdown)
+  // ---------------------------------------
+
+  if (typeof i18next !== 'undefined' && typeof i18NextHttpBackend !== 'undefined') {
+    i18next
+      .use(i18NextHttpBackend)
+      .init({
+        lng: window.templateCustomizer ? window.templateCustomizer.settings.lang : 'en',
+        debug: false,
+        fallbackLng: 'en',
+        backend: {
+          loadPath: assetsPath + 'json/locales/{{lng}}.json'
+        },
+        returnObjects: true
+      })
+      .then(function (t) {
+        localize();
+      });
+  }
+
+  let languageDropdown = document.getElementsByClassName('dropdown-language');
+
+  if (languageDropdown.length) {
+    let dropdownItems = languageDropdown[0].querySelectorAll('.dropdown-item');
+
+    for (let i = 0; i < dropdownItems.length; i++) {
+      dropdownItems[i].addEventListener('click', function () {
+        let currentLanguage = this.getAttribute('data-language');
+        let textDirection = this.getAttribute('data-text-direction');
+
+        for (let sibling of this.parentNode.children) {
+          var siblingEle = sibling.parentElement.parentNode.firstChild;
+
+          // Loop through each sibling and push to the array
+          while (siblingEle) {
+            if (siblingEle.nodeType === 1 && siblingEle !== siblingEle.parentElement) {
+              siblingEle.querySelector('.dropdown-item').classList.remove('active');
+            }
+            siblingEle = siblingEle.nextSibling;
+          }
+        }
+        this.classList.add('active');
+
+        i18next.changeLanguage(currentLanguage, (err, t) => {
+          window.templateCustomizer ? window.templateCustomizer.setLang(currentLanguage) : '';
+          directionChange(textDirection);
+          if (err) return console.log('something went wrong loading', err);
+          localize();
+        });
+      });
+    }
+    function directionChange(textDirection) {
+      if (textDirection === 'rtl') {
+        if (localStorage.getItem('templateCustomizer-' + templateName + '--Rtl') !== 'true')
+          window.templateCustomizer ? window.templateCustomizer.setRtl(true) : '';
+      } else {
+        if (localStorage.getItem('templateCustomizer-' + templateName + '--Rtl') === 'true')
+          window.templateCustomizer ? window.templateCustomizer.setRtl(false) : '';
+      }
+    }
+  }
+
+  function localize() {
+    let i18nList = document.querySelectorAll('[data-i18n]');
+    // Set the current language in dd
+    let currentLanguageEle = document.querySelector('.dropdown-item[data-language="' + i18next.language + '"]');
+
+    if (currentLanguageEle) {
+      currentLanguageEle.click();
     }
 
-    if(localStorage.loaderEnable == 'true'){
-        document.querySelector("html").setAttribute("loader","enable");
-    }else{
-        if(!document.querySelector("html").getAttribute("loader")){
-            document.querySelector("html").setAttribute("loader","disable");
-        }
+    i18nList.forEach(function (item) {
+      item.innerHTML = i18next.t(item.dataset.i18n);
+    });
+  }
+
+  // Notification
+  // ------------
+  const notificationMarkAsReadAll = document.querySelector('.dropdown-notifications-all');
+  const notificationMarkAsReadList = document.querySelectorAll('.dropdown-notifications-read');
+
+  // Notification: Mark as all as read
+  if (notificationMarkAsReadAll) {
+    notificationMarkAsReadAll.addEventListener('click', event => {
+      notificationMarkAsReadList.forEach(item => {
+        item.closest('.dropdown-notifications-item').classList.add('marked-as-read');
+      });
+    });
+  }
+  // Notification: Mark as read/unread onclick of dot
+  if (notificationMarkAsReadList) {
+    notificationMarkAsReadList.forEach(item => {
+      item.addEventListener('click', event => {
+        item.closest('.dropdown-notifications-item').classList.toggle('marked-as-read');
+      });
+    });
+  }
+
+  // Notification: Mark as read/unread onclick of dot
+  const notificationArchiveMessageList = document.querySelectorAll('.dropdown-notifications-archive');
+  notificationArchiveMessageList.forEach(item => {
+    item.addEventListener('click', event => {
+      item.closest('.dropdown-notifications-item').remove();
+    });
+  });
+
+  // Init helpers & misc
+  // --------------------
+
+  // Init BS Tooltip
+  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+
+  // Accordion active class
+  const accordionActiveFunction = function (e) {
+    if (e.type == 'show.bs.collapse' || e.type == 'show.bs.collapse') {
+      e.target.closest('.accordion-item').classList.add('active');
+      e.target.closest('.accordion-item').previousElementSibling?.classList.add('previous-active');
+    } else {
+      e.target.closest('.accordion-item').classList.remove('active');
+      e.target.closest('.accordion-item').previousElementSibling?.classList.remove('previous-active');
     }
+  };
 
-    function localStorageBackup() {
+  const accordionTriggerList = [].slice.call(document.querySelectorAll('.accordion'));
+  const accordionList = accordionTriggerList.map(function (accordionTriggerEl) {
+    accordionTriggerEl.addEventListener('show.bs.collapse', accordionActiveFunction);
+    accordionTriggerEl.addEventListener('hide.bs.collapse', accordionActiveFunction);
+  });
 
-        // if there is a value stored, update color picker and background color
-        // Used to retrive the data from local storage
-        if (localStorage.primaryRGB) {
-            if (document.querySelector('.theme-container-primary')) {
-                document.querySelector('.theme-container-primary').value = localStorage.primaryRGB;
-            }
-            document.querySelector('html').style.setProperty('--primary-rgb', localStorage.primaryRGB);
-        }
-        if (localStorage.bodyBgRGB && localStorage.bodylightRGB) {
-            if (document.querySelector('.theme-container-background')) {
-                document.querySelector('.theme-container-background').value = localStorage.bodyBgRGB;
-            }
-            document.querySelector('html').style.setProperty('--body-bg-rgb', localStorage.bodyBgRGB);
-            document.querySelector('html').style.setProperty('--light-rgb', localStorage.bodylightRGB);
-            document.querySelector('html').style.setProperty('--form-control-bg', `rgb(${localStorage.bodylightRGB})`);
-            document.querySelector('html').style.setProperty('--input-border', "rgba(255,255,255,0.1)");
-            document.querySelector('html').style.setProperty('--input-border', "rgba(255,255,255,0.1)");
-            document.querySelector('html').style.setProperty('--sidemenu-active-bgcolor', `rgb(${localStorage.bodylightRGB})`);
-            let html = document.querySelector('html');
-            html.setAttribute('data-theme-mode', 'dark');
-            html.setAttribute('data-menu-styles', 'dark');
-            html.setAttribute('data-header-styles', 'dark');
-        }
-        if (localStorage.spruhadarktheme) {
-            let html = document.querySelector('html');
-            html.setAttribute('data-theme-mode', 'dark');
-        }
-        if (localStorage.spruhartl) {
-            let html = document.querySelector('html');
-            html.setAttribute('dir', 'rtl');
-            document.querySelector('#style').href = '../assets/libs/bootstrap/css/bootstrap.rtl.min.css'
-            setTimeout(() => {
-                rtlFn();
-            }, 1000);
-        }
-        if (localStorage.spruhalayout) {
-            let html = document.querySelector('html');
-            let layoutValue = localStorage.getItem('spruhalayout');
-            html.setAttribute('data-nav-layout', 'horizontal');
-            setTimeout(() => {
-                clearNavDropdown();
-            }, 5000);
-            html.setAttribute('data-nav-style', 'menu-click');
-            setTimeout(() => {
-                checkHoriMenu();
-            }, 5000);
-        }
-        if (localStorage.spruhaverticalstyles) {
-            let html = document.querySelector('html');
-            let verticalStyles = localStorage.getItem('spruhaverticalstyles');
+  // If layout is RTL add .dropdown-menu-end class to .dropdown-menu
+  // if (isRtl) {
+  //   Helpers._addClass('dropdown-menu-end', document.querySelectorAll('#layout-navbar .dropdown-menu'));
+  // }
 
-            if (verticalStyles == 'closed') {
-                html.setAttribute('data-vertical-style', 'closed');
-                localStorage.removeItem("spruhanavstyles")
-            }
-            if (verticalStyles == 'icontext') {
-                html.setAttribute('data-vertical-style', 'icontext');
-                localStorage.removeItem("spruhanavstyles")
-            }
-            if (verticalStyles == 'overlay') {
-                html.setAttribute('data-vertical-style', 'overlay');
-                localStorage.removeItem("spruhanavstyles")
-            }
-            if (verticalStyles == 'detached') {
-                html.setAttribute('data-vertical-style', 'detached');
-                localStorage.removeItem("spruhanavstyles")
-            }
-            if (verticalStyles === "doublemenu") {
-                document.querySelector("html").setAttribute("data-vertical-style", "doublemenu");
-                localStorage.removeItem("spruhanavstyles");
-                setTimeout(() => {
-                  const menuSlideItem = document.querySelectorAll(".main-menu > li > .side-menu__item");
-              
-                  // Create the tooltip element
-                  const tooltip = document.createElement("div");
-                  tooltip.className = "custom-tooltip";
-                  // Set the CSS properties of the tooltip element
-                  tooltip.style.setProperty("position", "fixed");
-                  tooltip.style.setProperty("display", "none");
-                  tooltip.style.setProperty("padding", "0.5rem");
-                  tooltip.style.setProperty("font-weight", "500");
-                  tooltip.style.setProperty("font-size", "0.75rem");
-                  tooltip.style.setProperty("background-color", "rgb(15, 23 ,42)");
-                  tooltip.style.setProperty("color", "rgb(255, 255 ,255)");
-                  tooltip.style.setProperty("margin-inline-start", "48px");
-                  tooltip.style.setProperty("border-radius", "0.25rem");
-                  tooltip.style.setProperty("z-index", "99");
-              
-                  menuSlideItem.forEach((e) => {
-                    // Add an event listener to the menu slide item to show the tooltip
-                    e.addEventListener("mouseenter", () => {
-                      if (localStorage.getItem("spruhaverticalstyles") === "doublemenu") {
-                        tooltip.style.setProperty("display", "block");
-                        tooltip.textContent = e.querySelector(".side-menu__label").textContent;
-                        if (
-                          document.querySelector("html").getAttribute("data-vertical-style") === "doublemenu"
-                        ) {
-                          e.appendChild(tooltip);
-                        }
-                      }
-                    });
-              
-                    // Add an event listener to hide the tooltip
-                    e.addEventListener("mouseleave", () => {
-                      tooltip.style.setProperty("display", "none");
-                      tooltip.textContent = e.querySelector(".side-menu__label").textContent;
-                    });
-                  });
-                }, 1000);
-            }
-        }
-        if (localStorage.spruhanavstyles) {
-            let html = document.querySelector('html');
-            let navStyles = localStorage.getItem('spruhanavstyles');
-            if (navStyles == 'menu-click') {
-                html.setAttribute('data-nav-style', 'menu-click');
-                localStorage.removeItem("spruhaverticalstyles");
-                html.removeAttribute('data-vertical-style');
-            }
-            if (navStyles == 'menu-hover') {
-                html.setAttribute('data-nav-style', 'menu-hover');
-                localStorage.removeItem("spruhaverticalstyles");
-                html.removeAttribute('data-vertical-style');
-            }
-            if (navStyles == 'icon-click') {
-                html.setAttribute('data-nav-style', 'icon-click');
-                localStorage.removeItem("spruhaverticalstyles");
-                html.removeAttribute('data-vertical-style');
-            }
-            if (navStyles == 'icon-hover') {
-                html.setAttribute('data-nav-style', 'icon-hover');
-                localStorage.removeItem("spruhaverticalstyles");
-                html.removeAttribute('data-vertical-style');
-            }
-        }
-        if (localStorage.spruhaclassic) {
-            let html = document.querySelector('html');
-            html.setAttribute('data-page-style', 'classic'); 
-        }
-        if (localStorage.spruhamodern) {
-            let html = document.querySelector('html');
-            html.setAttribute('data-page-style', 'modern');
-        }
-        if (localStorage.spruhaboxed) {
-            let html = document.querySelector('html');
-            html.setAttribute('data-width', 'boxed');
-        }
-        if (localStorage.spruhaheaderfixed) {
-            let html = document.querySelector('html');
-            html.setAttribute('data-header-position', 'fixed');
-        }
-        if (localStorage.spruhaheaderscrollable) {
-            let html = document.querySelector('html');
-            html.setAttribute('data-header-position', 'scrollable');
-        }
-        if (localStorage.spruhamenufixed) {
-            let html = document.querySelector('html');
-            html.setAttribute('data-menu-position', 'fixed');
-        }
-        if (localStorage.spruhamenuscrollable) {
-            let html = document.querySelector('html');
-            html.setAttribute('data-menu-position', 'scrollable');
-        }
-        if (localStorage.spruhaMenu) {
-            let html = document.querySelector('html');
-            let menuValue = localStorage.getItem('spruhaMenu');
-            switch (menuValue) {
-                case 'light':
-                    html.setAttribute('data-menu-styles', 'light');
-                    break;
-                case 'dark':
-                    html.setAttribute('data-menu-styles', 'dark');
-                    break;
-                case 'color':
-                    html.setAttribute('data-menu-styles', 'color');
-                    break;
-                case 'gradient':
-                    html.setAttribute('data-menu-styles', 'gradient');
-                    break;
-                case 'transparent':
-                    html.setAttribute('data-menu-styles', 'transparent');
-                    break;
-                default:
-                    break;
-            }
-        }
-        if (localStorage.spruhaHeader) {
-            let html = document.querySelector('html');
-            let headerValue = localStorage.getItem('spruhaHeader');
-            switch (headerValue) {
-                case 'light':
-                    html.setAttribute('data-header-styles', 'light');
-                    break;
-                case 'dark':
-                    html.setAttribute('data-header-styles', 'dark');
-                    break;
-                case 'color':
-                    html.setAttribute('data-header-styles', 'color');
-                    break;
-                case 'gradient':
-                    html.setAttribute('data-header-styles', 'gradient');
-                    break;
-                case 'transparent':
-                    html.setAttribute('data-header-styles', 'transparent');
-                    break;
+  // Auto update layout based on screen size
+  window.Helpers.setAutoUpdate(true);
 
-                default:
-                    break;
-            }
-        }
-        if (localStorage.bgimg) {
-            let html = document.querySelector('html');
-            let value = localStorage.getItem('bgimg');
-            html.setAttribute('data-bg-img', value);
-        }
+  // Toggle Password Visibility
+  window.Helpers.initPasswordToggle();
+
+  // Speech To Text
+  window.Helpers.initSpeechToText();
+
+  // Nav tabs animation
+  window.Helpers.navTabsAnimation();
+
+  // Init PerfectScrollbar in Navbar Dropdown (i.e notification)
+  window.Helpers.initNavbarDropdownScrollbar();
+
+  let horizontalMenuTemplate = document.querySelector("[data-template^='horizontal-menu']");
+  if (horizontalMenuTemplate) {
+    // if screen size is small then set navbar fixed
+    if (window.innerWidth < window.Helpers.LAYOUT_BREAKPOINT) {
+      window.Helpers.setNavbarFixed('fixed');
+    } else {
+      window.Helpers.setNavbarFixed('');
     }
-    localStorageBackup()        
+  }
 
+  // On window resize listener
+  // -------------------------
+  window.addEventListener(
+    'resize',
+    function (event) {
+      // Hide open search input and set value blank
+      if (window.innerWidth >= window.Helpers.LAYOUT_BREAKPOINT) {
+        if (document.querySelector('.search-input-wrapper')) {
+          document.querySelector('.search-input-wrapper').classList.add('d-none');
+          document.querySelector('.search-input').value = '';
+        }
+      }
+      // Horizontal Layout : Update menu based on window size
+      if (horizontalMenuTemplate) {
+        // if screen size is small then set navbar fixed
+        if (window.innerWidth < window.Helpers.LAYOUT_BREAKPOINT) {
+          window.Helpers.setNavbarFixed('fixed');
+        } else {
+          window.Helpers.setNavbarFixed('');
+        }
+        setTimeout(function () {
+          if (window.innerWidth < window.Helpers.LAYOUT_BREAKPOINT) {
+            if (document.getElementById('layout-menu')) {
+              if (document.getElementById('layout-menu').classList.contains('menu-horizontal')) {
+                menu.switchMenu('vertical');
+              }
+            }
+          } else {
+            if (document.getElementById('layout-menu')) {
+              if (document.getElementById('layout-menu').classList.contains('menu-vertical')) {
+                menu.switchMenu('horizontal');
+              }
+            }
+          }
+        }, 100);
+      }
+
+      window.Helpers.navTabsAnimation();
+    },
+    true
+  );
+
+  // Manage menu expanded/collapsed with templateCustomizer & local storage
+  //------------------------------------------------------------------
+
+  // If current layout is horizontal OR current window screen is small (overlay menu) than return from here
+  if (isHorizontalLayout || window.Helpers.isSmallScreen()) {
+    return;
+  }
+
+  // If current layout is vertical and current window screen is > small
+
+  // Auto update menu collapsed/expanded based on the themeConfig
+  if (typeof TemplateCustomizer !== 'undefined') {
+    if (window.templateCustomizer.settings.defaultMenuCollapsed) {
+      window.Helpers.setCollapsed(true, false);
+    } else {
+      window.Helpers.setCollapsed(false, false);
+    }
+  }
+
+  // Manage menu expanded/collapsed state with local storage support If enableMenuLocalStorage = true in config.js
+  if (typeof config !== 'undefined') {
+    if (config.enableMenuLocalStorage) {
+      try {
+        if (localStorage.getItem('templateCustomizer-' + templateName + '--LayoutCollapsed') !== null)
+          window.Helpers.setCollapsed(
+            localStorage.getItem('templateCustomizer-' + templateName + '--LayoutCollapsed') === 'true',
+            false
+          );
+      } catch (e) {}
+    }
+  }
 })();
+
+// ! Removed following code if you do't wish to use jQuery. Remember that navbar search functionality will stop working on removal.
+if (typeof $ !== 'undefined') {
+  $(function () {
+    // ! TODO: Required to load after DOM is ready, did this now with jQuery ready.
+    window.Helpers.initSidebarToggle();
+    // Toggle Universal Sidebar
+
+    // Navbar Search with autosuggest (typeahead)
+    // ? You can remove the following JS if you don't want to use search functionality.
+    //----------------------------------------------------------------------------------
+
+    var searchToggler = $('.search-toggler'),
+      searchInputWrapper = $('.search-input-wrapper'),
+      searchInput = $('.search-input'),
+      contentBackdrop = $('.content-backdrop');
+
+    // Open search input on click of search icon
+    if (searchToggler.length) {
+      searchToggler.on('click', function () {
+        if (searchInputWrapper.length) {
+          searchInputWrapper.toggleClass('d-none');
+          searchInput.focus();
+        }
+      });
+    }
+    // Open search on 'CTRL+/'
+    $(document).on('keydown', function (event) {
+      let ctrlKey = event.ctrlKey,
+        slashKey = event.which === 191;
+
+      if (ctrlKey && slashKey) {
+        if (searchInputWrapper.length) {
+          searchInputWrapper.toggleClass('d-none');
+          searchInput.focus();
+        }
+      }
+    });
+    // Note: Following code is required to update container class of typeahead dropdown width on focus of search input. setTimeout is required to allow time to initiate Typeahead UI.
+    setTimeout(function () {
+      var twitterTypeahead = $('.twitter-typeahead');
+      searchInput.on('focus', function () {
+        if (searchInputWrapper.hasClass('container-xxl')) {
+          searchInputWrapper.find(twitterTypeahead).addClass('container-xxl');
+          twitterTypeahead.removeClass('container-fluid');
+        } else if (searchInputWrapper.hasClass('container-fluid')) {
+          searchInputWrapper.find(twitterTypeahead).addClass('container-fluid');
+          twitterTypeahead.removeClass('container-xxl');
+        }
+      });
+    }, 10);
+
+    if (searchInput.length) {
+      // Filter config
+      var filterConfig = function (data) {
+        return function findMatches(q, cb) {
+          let matches;
+          matches = [];
+          data.filter(function (i) {
+            if (i.name.toLowerCase().startsWith(q.toLowerCase())) {
+              matches.push(i);
+            } else if (
+              !i.name.toLowerCase().startsWith(q.toLowerCase()) &&
+              i.name.toLowerCase().includes(q.toLowerCase())
+            ) {
+              matches.push(i);
+              matches.sort(function (a, b) {
+                return b.name < a.name ? 1 : -1;
+              });
+            } else {
+              return [];
+            }
+          });
+          cb(matches);
+        };
+      };
+
+      // Search JSON
+      var searchJson = 'search-vertical.json'; // For vertical layout
+      if ($('#layout-menu').hasClass('menu-horizontal')) {
+        var searchJson = 'search-horizontal.json'; // For vertical layout
+      }
+      // Search API AJAX call
+      var searchData = $.ajax({
+        url: assetsPath + 'json/' + searchJson, //? Use your own search api instead
+        dataType: 'json',
+        async: false
+      }).responseJSON;
+      // Init typeahead on searchInput
+      searchInput.each(function () {
+        var $this = $(this);
+        searchInput
+          .typeahead(
+            {
+              hint: false,
+              classNames: {
+                menu: 'tt-menu navbar-search-suggestion',
+                cursor: 'active',
+                suggestion: 'suggestion d-flex justify-content-between px-3 py-2 w-100'
+              }
+            },
+            // ? Add/Update blocks as per need
+            // Pages
+            {
+              name: 'pages',
+              display: 'name',
+              limit: 5,
+              source: filterConfig(searchData.pages),
+              templates: {
+                header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Pages</h6>',
+                suggestion: function ({ url, icon, name }) {
+                  return (
+                    '<a href="' +
+                    url +
+                    '">' +
+                    '<div>' +
+                    '<i class="' +
+                    icon +
+                    ' me-2"></i>' +
+                    '<span class="align-middle">' +
+                    name +
+                    '</span>' +
+                    '</div>' +
+                    '</a>'
+                  );
+                },
+                notFound:
+                  '<div class="not-found px-3 py-2">' +
+                  '<h6 class="suggestions-header text-primary mb-2">Pages</h6>' +
+                  '<p class="py-2 mb-0"><i class="ri-warning-line me-2 ri-14px"></i> No Results Found</p>' +
+                  '</div>'
+              }
+            },
+            // Files
+            {
+              name: 'files',
+              display: 'name',
+              limit: 4,
+              source: filterConfig(searchData.files),
+              templates: {
+                header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Files</h6>',
+                suggestion: function ({ src, name, subtitle, meta }) {
+                  return (
+                    '<a href="javascript:;">' +
+                    '<div class="d-flex w-50">' +
+                    '<img class="me-3" src="' +
+                    assetsPath +
+                    src +
+                    '" alt="' +
+                    name +
+                    '" height="32">' +
+                    '<div class="w-75">' +
+                    '<h6 class="mb-0">' +
+                    name +
+                    '</h6>' +
+                    '<small class="text-muted">' +
+                    subtitle +
+                    '</small>' +
+                    '</div>' +
+                    '</div>' +
+                    '<small class="text-muted">' +
+                    meta +
+                    '</small>' +
+                    '</a>'
+                  );
+                },
+                notFound:
+                  '<div class="not-found px-3 py-2">' +
+                  '<h6 class="suggestions-header text-primary mb-2">Files</h6>' +
+                  '<p class="py-2 mb-0"><i class="ri-warning-line me-2 ri-14px"></i> No Results Found</p>' +
+                  '</div>'
+              }
+            },
+            // Members
+            {
+              name: 'members',
+              display: 'name',
+              limit: 4,
+              source: filterConfig(searchData.members),
+              templates: {
+                header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Members</h6>',
+                suggestion: function ({ name, src, subtitle }) {
+                  return (
+                    '<a href="app-user-view-account.html">' +
+                    '<div class="d-flex align-items-center">' +
+                    '<img class="rounded-circle me-3" src="' +
+                    assetsPath +
+                    src +
+                    '" alt="' +
+                    name +
+                    '" height="32">' +
+                    '<div class="user-info">' +
+                    '<h6 class="mb-0">' +
+                    name +
+                    '</h6>' +
+                    '<small class="text-muted">' +
+                    subtitle +
+                    '</small>' +
+                    '</div>' +
+                    '</div>' +
+                    '</a>'
+                  );
+                },
+                notFound:
+                  '<div class="not-found px-3 py-2">' +
+                  '<h6 class="suggestions-header text-primary mb-2">Members</h6>' +
+                  '<p class="py-2 mb-0"><i class="ri-warning-line me-2 ri-14px"></i> No Results Found</p>' +
+                  '</div>'
+              }
+            }
+          )
+          //On typeahead result render.
+          .bind('typeahead:render', function () {
+            // Show content backdrop,
+            contentBackdrop.addClass('show').removeClass('fade');
+          })
+          // On typeahead select
+          .bind('typeahead:select', function (ev, suggestion) {
+            // Open selected page
+            if (suggestion.url) {
+              window.location = suggestion.url;
+            }
+          })
+          // On typeahead close
+          .bind('typeahead:close', function () {
+            // Clear search
+            searchInput.val('');
+            $this.typeahead('val', '');
+            // Hide search input wrapper
+            searchInputWrapper.addClass('d-none');
+            // Fade content backdrop
+            contentBackdrop.addClass('fade').removeClass('show');
+          });
+
+        // On searchInput keyup, Fade content backdrop if search input is blank
+        searchInput.on('keyup', function () {
+          if (searchInput.val() == '') {
+            contentBackdrop.addClass('fade').removeClass('show');
+          }
+        });
+      });
+
+      // Init PerfectScrollbar in search result
+      var psSearch;
+      $('.navbar-search-suggestion').each(function () {
+        psSearch = new PerfectScrollbar($(this)[0], {
+          wheelPropagation: false,
+          suppressScrollX: true
+        });
+      });
+
+      searchInput.on('keyup', function () {
+        psSearch.update();
+      });
+    }
+  });
+}

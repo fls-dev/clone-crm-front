@@ -8,6 +8,7 @@
   "title_page" : {
     "default":"CRM",
     "login": "Authorization",
+    "signup": "Account registration",
     "dashboard": "Services panel",
     "consultation": "Online consultations",
     "invoices": "INVOICE GENERATION ONLINE",
@@ -165,8 +166,10 @@
   },
   "authorization": {
     "log_title": "Log in",
+    "already_reg": "Already registered? ",
     "btn_login": "Log in",
     "forgot": "Forgot your password?",
+    "remember": "Remember Me",
     "email": "E-mail",
     "pl_email": "E-mail or Login",
     "pass": "Password",
@@ -182,7 +185,9 @@
     "reg_name": "Name",
     "reg_rep_pass": "Repeat password",
     "reg_phone": "Phone",
-    "btn_reg": "Sign up"
+    "btn_reg": "Sign up",
+    "lang":"Interface language",
+    "agree":"I agree with "
   },
   "profile": {
     "pass": "Password",

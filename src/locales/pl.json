@@ -8,6 +8,7 @@
   "title_page" : {
     "default":"CRM",
     "login": "Zaloguj się",
+    "signup": "Rejestracja konta",
     "dashboard": "Manager usług",
     "consultation": "Konsultacje online",
     "invoices": "FAKTUROWANIE ONLINE",
@@ -162,8 +163,10 @@
   },
   "authorization": {
     "log_title": "Zaloguj się",
+    "already_reg": "Masz już konto? ",
     "btn_login": "Zaloguj",
     "forgot": "Nie pamiętasz hasła?",
+    "remember":"Pamiętaj mnie",
     "email": "E-mail",
     "pl_email": "E-mail lub Login",
     "pass": "Hasło",
@@ -179,7 +182,9 @@
     "reg_name": "Imię",
     "reg_rep_pass": "Powtórz hasło",
     "reg_phone": "Telefon",
-    "btn_reg": "Załóż konto"
+    "btn_reg": "Załóż konto",
+    "lang": "Język interfejsu",
+    "agree":"Zgadzam się z "
   },
   "profile": {
     "pass": "Hasło",
